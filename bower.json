@@ -1,0 +1,22 @@
+{
+  "name": "bonanza",
+  "main": "dist/bonanza.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/nescalante/bonanza",
+  "authors": [
+    "Nicolas Escalante <nlante@gmail.com>"
+  ],
+  "description": "Autocomplete for developers",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "tests"
+  ]
+}

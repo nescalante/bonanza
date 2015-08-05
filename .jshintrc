@@ -1,0 +1,32 @@
+{
+  "curly": true,
+  "eqeqeq": true,
+  "newcap": true,
+  "noarg": true,
+  "noempty": true,
+  "nonew": true,
+  "sub": true,
+  "validthis": true,
+  "undef": true,
+  "trailing": true,
+  "boss": true,
+  "eqnull": true,
+  "strict": true,
+  "immed": true,
+  "expr": true,
+  "browser": true,
+  "latedef": "nofunc",
+  "quotmark": "single",
+  "indent": 2,
+  "evil": true,
+  "node": true,
+  "predef": ["angular"],
+  "globals"   : {
+    "describe"   : false,
+    "it"         : false,
+    "before"     : false,
+    "beforeEach" : false,
+    "after"      : false,
+    "afterEach"  : false
+  }
+}

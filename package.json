@@ -1,0 +1,32 @@
+{
+  "name": "bonanza",
+  "version": "0.1.0",
+  "description": "Autocomplete for developers",
+  "main": "index.js",
+  "scripts": {
+    "test": "jshint index.js --reporter node_modules/jshint-stylish/stylish.js && tape tests/**/*.js",
+    "build": "npm run test; browserify src/index.js -d -o dist/bonanza.js; uglify -s dist/bonanza.js -o dist/bonanza.min.js",
+    "start": "watchify src/index.js -d -o dist/bonanza.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nescalante/bonanza"
+  },
+  "keywords": [],
+  "author": "Nicolas Escalante <nlante@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nescalante/bonanza/issues"
+  },
+  "homepage": "https://github.com/nescalante/bonanza",
+  "devDependencies": {
+    "browserify": "^11.0.1",
+    "jshint": "~2.6.0",
+    "jshint-stylish": "~1.0.0",
+    "tape": "^4.0.0",
+    "watchify": "^3.3.1"
+  },
+  "dependencies": {
+    "mustache": "^2.1.3"
+  }
+}

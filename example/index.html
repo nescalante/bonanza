@@ -1,0 +1,60 @@
+<html>
+<head>
+  <style>
+    div, ul, li {
+      margin: 0;
+      padding: 0;
+    }
+
+    input[type="text"] {
+      padding: 5px;
+    }
+
+    .bz-container {
+      max-height: 120px;
+      width: 200px;
+      overflow: auto;
+      border: 1px solid #eee;
+      position: absolute;
+      background-color: #fff;
+      visibility: visible;
+    }
+
+    .bz-container.bz-hide {
+      visibility: hidden;
+    }
+
+    .bz-list-item {
+      padding: 5px;
+    }
+
+    .bz-list-loading, .bz-list-load-more {
+      padding: 8px;
+      color: #666;
+    }
+
+    .bz-list-item:hover {
+      background-color: #357;
+      color: #fff;
+    }
+
+    .bz-list-item.bz-list-item-selected {
+      background-color: #def;
+    }
+
+    .bz-list-item.bz-list-item-selected:hover {
+      background-color: #89a;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+<div>
+    <p>Hello world</p>
+    <input id="bonanza" type="text" />
+    <p>Info here</p>
+</div>
+<script src="../dist/bonanza.js"></script>
+<script src="example.js"></script>
+</body>
+</html>
