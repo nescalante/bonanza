@@ -92,7 +92,7 @@ The max number of rows expected, `10` by default.
 A function that helps to decide whatever the list being accesed has more items to display or not. By default is this function:
 
 ```js
-function (result) { return !!result.length; }
+function (result) { return !!result.length && result.length === this.limit; }
 ```
 
 #### `options.queryTransform`

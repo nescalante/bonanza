@@ -1,11 +1,11 @@
 {
   "name": "bonanza",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Customizable autocomplete for really large collections",
   "main": "bonanza.js",
   "scripts": {
     "test": "jshint src/*.js --reporter node_modules/jshint-stylish/stylish.js && tape tests/**/*.js",
-    "build": "npm run test; browserify bonanza.js -d -o dist/bonanza.js; uglify -s dist/bonanza.js -o dist/bonanza.min.js",
+    "build": "npm run test; browserify bonanza.js -d -o dist/bonanza.js; uglify -s dist/bonanza.js -o dist/bonanza.min.js && cleancss dist/bonanza.css -o dist/bonanza.min.css",
     "start": "watchify bonanza.js -d -o dist/bonanza.js"
   },
   "repository": {
@@ -24,6 +24,7 @@
   "homepage": "https://github.com/nescalante/bonanza",
   "devDependencies": {
     "browserify": "^11.0.1",
+    "clean-css": "^3.3.8",
     "jshint": "~2.6.0",
     "jshint-stylish": "~1.0.0",
     "tape": "^4.0.0",
