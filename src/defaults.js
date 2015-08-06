@@ -5,17 +5,18 @@ var css = {
   hide: 'bz-hide',
   list: 'bz-list',
   item: 'bz-list-item',
-  loadMore: 'bz-list-load-more',
   selected: 'bz-list-item-selected',
-  listLoading: 'bz-list-loading',
-  loading: 'bz-loading',
+  loading: 'bz-list-loading',
+  loadMore: 'bz-list-load-more',
+  noResults: 'bz-list-no-results',
+  inputLoading: 'bz-loading',
   match: 'bz-text-match'
 };
 
 var templates = {
   item: '{{.}}',
   label: '{{{.}}}',
-  noResults: 'No results',
+  noResults: 'No results for "{{search}}"',
   loadMore: '...',
   loading: 'Loading ...'
 };
@@ -24,6 +25,7 @@ module.exports = {
   templates: templates,
   css: css,
   openOnFocus: true,
+  showLoadingElement: true,
   limit: 10,
   hasMoreItems: function (result) { return !!result.length && result.length === this.limit; },
   queryTransform: function (query) { return query; },

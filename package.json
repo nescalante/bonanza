@@ -2,7 +2,7 @@
   "name": "bonanza",
   "version": "0.1.0",
   "description": "Autocomplete for developers",
-  "main": "src/index.js",
+  "main": "bonanza.js",
   "scripts": {
     "test": "jshint index.js --reporter node_modules/jshint-stylish/stylish.js && tape tests/**/*.js",
     "build": "npm run test; browserify src/index.js -d -o dist/bonanza.js; uglify -s dist/bonanza.js -o dist/bonanza.min.js",

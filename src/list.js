@@ -7,7 +7,7 @@ module.exports = {
 };
 
 function createList(context, options) {
-  var loadMore, loading, list;
+  var loadMore, loading, list, noResults;
   var items = [];
   context.container.innerHTML = '<ul class="' + options.css.list + '"></ul>';
   list = context.container.children[0];
@@ -19,21 +19,27 @@ function createList(context, options) {
     showLoading: showLoading,
     hideLoading: hideLoading,
     showLoadMore: showLoadMore,
-    isLoading: isLoading,
+    showNoResults: showNoResults,
     hasMoreItems: hasMoreItems
   };
 
-  function pushItem(info) {
-    var itemElem = document.createElement('li');
+  function pushItem(info, search) {
+    var itemElem = appendElement(options.templates.item, options.css.item, info);
     var item = { data: info, element: itemElem };
-    itemElem.className = options.css.item;
-    itemElem.innerHTML = render(options.templates.item, info);
+    var regExp = new RegExp(search, 'ig');
+
+    itemElem.innerHTML = itemElem.innerHTML.replace(regExp, highlight);
     itemElem.addEventListener('mousedown', function (e) {
       context.emit('change', item);
     });
 
+    hideLoading();
     list.appendChild(itemElem);
     items.push(item);
+  }
+
+  function highlight (str) {
+    return '<span class="' + options.css.match + '">' + str + '</span>';
   }
 
   function cleanItems() {
@@ -41,19 +47,15 @@ function createList(context, options) {
     list.innerHTML = '';
     loadMore = null;
     loading = null;
+    noResults = null;
   }
 
   function showLoading(query) {
-    if (loadMore) {
-      list.removeChild(loadMore);
-      loadMore = null;
-    }
+    hideLoadMore();
+    hideNoResults();
 
     if (!loading) {
-      loading = document.createElement('li');
-      loading.innerHTML = render(options.templates.loading, query);
-      loading.className = options.css.listLoading;
-      list.appendChild(loading);
+      loading = appendElement(options.templates.loading, options.css.loading, query);
     }
 
     return loading;
@@ -70,20 +72,44 @@ function createList(context, options) {
     hideLoading();
 
     if (!loadMore) {
-      loadMore = document.createElement('li');
-      loadMore.innerHTML = render(options.templates.loadMore, result);
-      loadMore.className = options.css.loadMore;
-      list.appendChild(loadMore);
+      loadMore = appendElement(options.templates.loadMore, options.css.loadMore, result);
     }
 
     return loadMore;
   }
 
-  function isLoading() {
-    return !!loading;
+  function hideLoadMore() {
+    if (loadMore) {
+      list.removeChild(loadMore);
+      loadMore = null;
+    }
+  }
+
+  function showNoResults(result) {
+    hideLoading();
+
+    if (!loadMore) {
+      noResults = appendElement(options.templates.noResults, options.css.noResults, result);
+    }
+  }
+
+  function hideNoResults() {
+    if (noResults) {
+      list.removeChild(noResults);
+      noResults = null;
+    }
   }
 
   function hasMoreItems() {
     return !!(loadMore || loading);
+  }
+
+  function appendElement(template, className, obj) {
+    var element = document.createElement('li');
+    element.innerHTML = render(template, obj);
+    element.className = className;
+    list.appendChild(element);
+
+    return element;
   }
 }

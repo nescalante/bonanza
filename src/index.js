@@ -50,7 +50,11 @@ function bonanza(element, options, callback) {
   });
 
   context.on('change', function (item) {
-    element.value = render(options.templates.label, item.data);
+    if (item) {
+      element.value = render(options.templates.label, item.data);
+    }
+
+    initialState = null;
     context.emit('close');
   });
 
@@ -78,6 +82,7 @@ function bonanza(element, options, callback) {
   context.on('cancel', function () {
     if (initialState) {
       element.value = initialState.searchTerm;
+      initialState = null;
     }
 
     context.emit('close');
@@ -98,12 +103,17 @@ function bonanza(element, options, callback) {
 
     if (query.offset === 0) {
       initialState = { oldValue: element.value, searchTerm: query.search };
-      dataList.clean();
     }
 
-    dataList.showLoading(transQuery);
-    dom.removeClass(container, options.css.hide);
-    dom.addClass(element, options.css.loading);
+    if (!dataList.items.length && options.showLoadingElement) {
+      dataList.showLoading(transQuery);
+      dom.removeClass(container, options.css.hide);
+    }
+    else if (dataList.items.length && query.offset) {
+      dataList.showLoading(transQuery);
+    }
+
+    dom.addClass(element, options.css.inputLoading);
     lastQuery = query;
     callback(transQuery, function (err, result) {
       if (err) {
@@ -112,23 +122,33 @@ function bonanza(element, options, callback) {
       }
 
       if (lastQuery === query) {
-        context.emit('searchSuccess', result);
+        if (query.offset === 0) {
+          dataList.clean();
+        }
+
+        context.emit('searchSuccess', result, transQuery, query.search);
       }
     });
   });
 
-  context.on('searchSuccess', function (result) {
+  context.on('searchSuccess', function (result, query, search) {
     var items = options.getItems(result);
+
     if (items) {
-      dataList.hideLoading();
+      dom.removeClass(container, options.css.hide);
 
       items.forEach(function (item) {
-        dataList.push(item);
+        dataList.push(item, search);
       });
 
       if (options.hasMoreItems(result)) {
         dataList.showLoadMore(result);
       }
+      else if (!dataList.items.length) {
+        dataList.showNoResults(query);
+      }
+
+      dataList.hideLoading();
     }
   });
 
@@ -185,18 +205,17 @@ function bonanza(element, options, callback) {
         nodeIndex = 0;
       }
 
-      if (dataList.hasMoreItems() && nodeIndex >= dataList.items.length - 2) {
+      if (!dataList.items.length || (dataList.hasMoreItems() && nodeIndex >= dataList.items.length - 2)) {
         context.emit('searchStart', { offset: dataList.items.length, limit: options.limit, search: initialState ? initialState.searchTerm : element.value });
       }
 
       if (dataList.items[nodeIndex]) {
         context.emit('select', dataList.items[nodeIndex].data, dataList.items[nodeIndex].element);
       }
-
     }
 
     else if (key === 'enter') {
-      context.emit('change', selectedItem);
+      context.emit('change', selectedItem || dataList.items[0]);
     }
 
     else if (key === 'escape') {
