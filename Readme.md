@@ -83,6 +83,10 @@ A boolean that decides whatever the list will be open on focus event or not. `tr
 
 If `true` it will show a loading text when `bonanza` does the first search (with the list empty). `true` by defualt.
 
+#### `options.limit`
+
+The max number of rows expected, `10` by default.
+
 #### `options.hasMoreItems`
 
 A function that helps to decide whatever the list being accesed has more items to display or not. By default is this function:
