@@ -35,7 +35,7 @@ function bonanza(element, options, callback) {
     var bottom = e.target.scrollTop + e.target.clientHeight - e.target.scrollHeight;
 
     if (bottom >= 0 && dataList.hasMoreItems() && initialState) {
-      context.emit('searchStart', { offset: dataList.items.length, limit: options.limit, search: initialState.searchTerm });
+      context.emit('search', { offset: dataList.items.length, search: initialState.searchTerm });
     }
   });
 
@@ -45,7 +45,7 @@ function bonanza(element, options, callback) {
 
   context.on('focus', function () {
     if (options.openOnFocus) {
-      context.emit('searchStart', { offset: 0, limit: options.limit, search: element.value });
+      context.emit('search', { offset: 0, search: element.value });
     }
   });
 
@@ -94,7 +94,7 @@ function bonanza(element, options, callback) {
     lastQuery = null;
   });
 
-  context.on('searchStart', function (query) {
+  context.on('search', function (query) {
     var transQuery = options.queryTransform(query);
 
     if (lastQuery && lastQuery.search === query.search && lastQuery.offset === query.offset) {
@@ -126,12 +126,12 @@ function bonanza(element, options, callback) {
           dataList.clean();
         }
 
-        context.emit('searchSuccess', result, transQuery, query.search);
+        context.emit('success', result, transQuery, query.search);
       }
     });
   });
 
-  context.on('searchSuccess', function (result, query, search) {
+  context.on('success', function (result, query, search) {
     var items = options.getItems(result);
 
     if (items) {
@@ -163,7 +163,7 @@ function bonanza(element, options, callback) {
 
   element.addEventListener('keyup', function (e) {
     if (!(e.keyCode.toString() in keys)) {
-      context.emit('searchStart', { offset: 0, limit: options.limit, search: element.value });
+      context.emit('search', { offset: 0, search: element.value });
     }
   });
 
@@ -206,7 +206,7 @@ function bonanza(element, options, callback) {
       }
 
       if (!dataList.items.length || (dataList.hasMoreItems() && nodeIndex >= dataList.items.length - 2)) {
-        context.emit('searchStart', { offset: dataList.items.length, limit: options.limit, search: initialState ? initialState.searchTerm : element.value });
+        context.emit('search', { offset: dataList.items.length, search: initialState ? initialState.searchTerm : element.value });
       }
 
       if (dataList.items[nodeIndex]) {

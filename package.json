@@ -1,18 +1,21 @@
 {
   "name": "bonanza",
-  "version": "0.2.0",
-  "description": "Autocomplete for developers",
+  "version": "0.3.0",
+  "description": "Customizable autocomplete for really large collections",
   "main": "bonanza.js",
   "scripts": {
     "test": "jshint src/*.js --reporter node_modules/jshint-stylish/stylish.js && tape tests/**/*.js",
-    "build": "npm run test; browserify src/index.js -d -o dist/bonanza.js; uglify -s dist/bonanza.js -o dist/bonanza.min.js",
-    "start": "watchify src/index.js -d -o dist/bonanza.js"
+    "build": "npm run test; browserify bonanza.js -d -o dist/bonanza.js; uglify -s dist/bonanza.js -o dist/bonanza.min.js",
+    "start": "watchify bonanza.js -d -o dist/bonanza.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/nescalante/bonanza"
   },
-  "keywords": [],
+  "keywords": [
+    "autocomplete",
+    "typeahead"
+  ],
   "author": "Nicolas Escalante <nlante@gmail.com>",
   "license": "MIT",
   "bugs": {

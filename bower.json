@@ -1,16 +1,18 @@
 {
   "name": "bonanza",
   "main": "dist/bonanza.js",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage": "https://github.com/nescalante/bonanza",
   "authors": [
     "Nicolas Escalante <nlante@gmail.com>"
   ],
-  "description": "Autocomplete for developers",
+  "description": "Customizable autocomplete for really large collections",
   "moduleType": [
     "globals"
   ],
   "keywords": [
+    "autocomplete",
+    "typeahead"
   ],
   "license": "MIT",
   "ignore": [

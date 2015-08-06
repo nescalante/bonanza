@@ -26,8 +26,7 @@ module.exports = {
   css: css,
   openOnFocus: true,
   showLoadingElement: true,
-  limit: 10,
-  hasMoreItems: function (result) { return !!result.length && result.length === this.limit; },
+  hasMoreItems: function (result) { return !!result.length; },
   queryTransform: function (query) { return query; },
   getItems: function (result) { return result; }
 };
