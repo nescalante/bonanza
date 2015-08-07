@@ -79,9 +79,13 @@ match         | `bz-text-match`         | A class when the search matches the te
 
 A boolean that decides whatever the list will be open on focus event or not. `true` by default.
 
-#### `options.showLoadingElement`
+#### `options.showLoading`
 
 If `true` it will show a loading text when `bonanza` does the first search (with the list empty). `true` by defualt.
+
+#### `options.showLoadMore`
+
+If `true` it will show a "load more" legend text when `bonanza` has more items to show. `true` by defualt.
 
 #### `options.limit`
 
@@ -121,6 +125,7 @@ focus   | When the user made focus on the input element
 change  | Every time the user picks an option
 select  | Every time the user selects an option, usually navigating the list with the arrow keys
 cancel  | Every time the user cancels the operation, usually touching the <kbd>esc</kbd> key
+open    | When something opens the items list
 close   | When the user or an event closes the list
 search  | When starting to do a search
 success | When the search returns data

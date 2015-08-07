@@ -8,6 +8,8 @@ var list = require('./list.js');
 var keys = require('./keys.js');
 var util = require('./util.js');
 
+bonanza.defaults = defaults;
+bonanza.render = render;
 global.bonanza = bonanza;
 module.exports = bonanza;
 
@@ -16,15 +18,25 @@ function bonanza(element, options, callback) {
     callback = options;
     options = {};
   }
+
+  if (options.templates) {
+    options.templates = util.merge(defaults.templates, options.templates);
+  }
+
+  if (options.css) {
+    options.css = util.merge(defaults.css, options.css);
+  }
+
   options = util.merge(defaults, options);
 
   var context = new EventEmitter();
   var selectedItem, lastQuery, initialState;
 
   var container = document.createElement('div');
-  container.className = options.css.container;
-  container.style.top = (element.offsetTop + element.offsetHeight) + 'px';
-  container.style.left = (element.offsetLeft) + 'px';
+  container.className = options.css.container || '';
+  element.parentNode.appendChild(container);
+  dom.addClass(container, options.css.hide);
+
   context.container = container;
   context.input = element;
   context.options = options;
@@ -35,7 +47,7 @@ function bonanza(element, options, callback) {
     var bottom = e.target.scrollTop + e.target.clientHeight - e.target.scrollHeight;
 
     if (bottom >= 0 && dataList.hasMoreItems() && initialState) {
-      context.emit('search', { offset: dataList.items.length, search: initialState.searchTerm });
+      context.emit('search', { offset: dataList.items.length, limit: options.limit, search: initialState.searchTerm });
     }
   });
 
@@ -45,13 +57,19 @@ function bonanza(element, options, callback) {
 
   context.on('focus', function () {
     if (options.openOnFocus) {
-      context.emit('search', { offset: 0, search: element.value });
+      context.emit('search', { offset: 0, limit: options.limit, search: element.value });
     }
   });
 
-  context.on('change', function (item) {
+  context.on('open', function () {
+    dom.removeClass(container, options.css.hide);
+    container.style.top = (element.offsetTop + element.offsetHeight) + 'px';
+    container.style.left = (element.offsetLeft) + 'px';
+  });
+
+  context.on('change', function (item, elem) {
     if (item) {
-      element.value = render(options.templates.label, item.data);
+      element.value = render(options.templates.label, item);
     }
 
     initialState = null;
@@ -105,9 +123,9 @@ function bonanza(element, options, callback) {
       initialState = { oldValue: element.value, searchTerm: query.search };
     }
 
-    if (!dataList.items.length && options.showLoadingElement) {
+    if (!dataList.items.length && options.showLoading) {
       dataList.showLoading(transQuery);
-      dom.removeClass(container, options.css.hide);
+      context.emit('open');
     }
     else if (dataList.items.length && query.offset) {
       dataList.showLoading(transQuery);
@@ -135,7 +153,7 @@ function bonanza(element, options, callback) {
     var items = options.getItems(result);
 
     if (items) {
-      dom.removeClass(container, options.css.hide);
+      context.emit('open');
 
       items.forEach(function (item) {
         dataList.push(item, search);
@@ -158,12 +176,14 @@ function bonanza(element, options, callback) {
   });
 
   element.addEventListener('blur', function (e) {
-    context.emit('close');
+    if (options.closeOnBlur) {
+      context.emit('close');
+    }
   });
 
   element.addEventListener('keyup', function (e) {
     if (!(e.keyCode.toString() in keys)) {
-      context.emit('search', { offset: 0, search: element.value });
+      context.emit('search', { offset: 0, limit: options.limit, search: element.value });
     }
   });
 
@@ -171,7 +191,7 @@ function bonanza(element, options, callback) {
     var lastIndex, nodeIndex;
     var key = keys[e.keyCode];
 
-    dom.removeClass(container, options.css.hide);
+    context.emit('open');
 
     if (selectedItem) {
       lastIndex =  dataList.items.indexOf(dataList.items.filter(function (item) { return item.data === selectedItem.data; })[0]);
@@ -206,7 +226,7 @@ function bonanza(element, options, callback) {
       }
 
       if (!dataList.items.length || (dataList.hasMoreItems() && nodeIndex >= dataList.items.length - 2)) {
-        context.emit('search', { offset: dataList.items.length, search: initialState ? initialState.searchTerm : element.value });
+        context.emit('search', { offset: dataList.items.length, limit: options.limit, search: initialState ? initialState.searchTerm : element.value });
       }
 
       if (dataList.items[nodeIndex]) {
@@ -215,16 +235,17 @@ function bonanza(element, options, callback) {
     }
 
     else if (key === 'enter') {
-      context.emit('change', selectedItem || dataList.items[0]);
+      selectedItem = selectedItem || dataList.items[0];
+
+      if (selectedItem) {
+        context.emit('change', selectedItem.data, selectedItem.element);
+      }
     }
 
     else if (key === 'escape') {
       context.emit('cancel');
     }
   });
-
-  dom.addClass(container, options.css.hide);
-  document.body.appendChild(container);
 
   return context;
 }

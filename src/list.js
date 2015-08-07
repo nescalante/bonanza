@@ -1,6 +1,7 @@
 'use strict';
 
 var render = require('mustache').render;
+var dom = require('./dom.js');
 
 module.exports = {
   create: createList
@@ -9,7 +10,7 @@ module.exports = {
 function createList(context, options) {
   var loadMore, loading, list, noResults;
   var items = [];
-  context.container.innerHTML = '<ul class="' + options.css.list + '"></ul>';
+  context.container.innerHTML = '<ul' + (options.css.list ? ' class="' + options.css.list + '"' : '') + '></ul>';
   list = context.container.children[0];
 
   return {
@@ -30,7 +31,7 @@ function createList(context, options) {
 
     itemElem.innerHTML = itemElem.innerHTML.replace(regExp, highlight);
     itemElem.addEventListener('mousedown', function (e) {
-      context.emit('change', item);
+      context.emit('change', info, itemElem);
     });
 
     hideLoading();
@@ -39,7 +40,7 @@ function createList(context, options) {
   }
 
   function highlight (str) {
-    return '<span class="' + options.css.match + '">' + str + '</span>';
+    return '<span' + (options.css.match ? ' class="' + options.css.match + '"' : '') + '>' + str + '</span>';
   }
 
   function cleanItems() {
@@ -75,6 +76,10 @@ function createList(context, options) {
       loadMore = appendElement(options.templates.loadMore, options.css.loadMore, result);
     }
 
+    if (!options.showLoadMore) {
+      dom.addClass(loadMore, options.css.hide);
+    }
+
     return loadMore;
   }
 
@@ -107,7 +112,7 @@ function createList(context, options) {
   function appendElement(template, className, obj) {
     var element = document.createElement('li');
     element.innerHTML = render(template, obj);
-    element.className = className;
+    element.className = className || '';
     list.appendChild(element);
 
     return element;

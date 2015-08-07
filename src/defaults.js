@@ -25,9 +25,11 @@ module.exports = {
   templates: templates,
   css: css,
   openOnFocus: true,
-  showLoadingElement: true,
+  showLoading: true,
+  showloadMore: true,
   limit: 10,
   hasMoreItems: function (result) { return !!result.length && result.length === this.limit; },
   queryTransform: function (query) { return query; },
-  getItems: function (result) { return result; }
+  getItems: function (result) { return result; },
+  closeOnBlur: true
 };

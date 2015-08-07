@@ -6,6 +6,10 @@ module.exports = {
 };
 
 function addClass(element, className) {
+  if (!className) {
+    return;
+  }
+
   var classes = element.className.split(' ');
 
   if (classes.indexOf(className) === -1) {
@@ -14,6 +18,10 @@ function addClass(element, className) {
 }
 
 function removeClass(element, className) {
+  if (!className) {
+    return;
+  }
+
   var classRegex = new RegExp('\\b' + className + '\\b', 'g');
   element.className = element.className.replace(classRegex, '').replace(/  /g, ' ').trim();
 }
