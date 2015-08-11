@@ -2,6 +2,10 @@
 
 > Customizable autocomplete for really large collections
 
+# See examples [here](http://nescalante.github.io/bonanza)!
+
+![Example page](http://i.imgur.com/NcDLjpB.png)
+
 # Install
 
 Use it as an npm package:
