@@ -1,7 +1,7 @@
 'use strict';
 
-var render = require('mustache').render;
 var dom = require('./dom.js');
+var render = require('./render.js');
 
 module.exports = {
   create: createList
@@ -111,7 +111,7 @@ function createList(context, options) {
 
   function appendElement(template, className, obj) {
     var element = document.createElement('li');
-    element.innerHTML = render(template, obj);
+    element.innerHTML = render(template, obj, true);
     element.className = className || '';
     list.appendChild(element);
 

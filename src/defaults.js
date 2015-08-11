@@ -15,7 +15,7 @@ var css = {
 
 var templates = {
   item: '{{.}}',
-  label: '{{{.}}}',
+  label: '{{.}}',
   noResults: 'No results for "{{search}}"',
   loadMore: '...',
   loading: 'Loading ...'
@@ -28,8 +28,8 @@ module.exports = {
   showLoading: true,
   showloadMore: true,
   limit: 10,
+  scrollDistance: 0,
   hasMoreItems: function (result) { return !!result.length && result.length === this.limit; },
-  queryTransform: function (query) { return query; },
   getItems: function (result) { return result; },
   closeOnBlur: true
 };

@@ -20,14 +20,14 @@ bower install bonanza --save
 
 You just need an input to work on and a function (a.k.a. callback) that returns your favorite data
 
-## `bonanza(element, options?, callback)`
+## `bonanza(element, options?, callback | list)`
 
 - `element` (required): 
   a `HTMLInput` Javascript element that will be used for autocompletion
 - `options` (optional):
   a set of parameters to customize `bonanza` as needed
-- `callback` (required):
-  `bonanza` doesn't know how to get your data, so it needs function that receives a query, and returns the rows that will be used to fill the autocomplete info.
+- `callback | list` (required):
+  `bonanza` doesn't know how to get your data, so it needs a function that receives a query, and returns the rows that will be used to fill the autocomplete info, or even an array with all the results that you need to display.
 
 The example below shows you how to easily set up `bonanza` for an `input` element:
 
@@ -48,7 +48,7 @@ The `options` are detailed below:
 
 #### `options.templates`
 
-An object with a set of [mustache](https://mustache.github.io/) templates. Here you have a detailed table with all that you need to replace:
+An object with a set of [mustache](https://mustache.github.io/) templates or functions. Here you have a detailed table with all that you need to replace:
 
 Property  | Default                       | Usage
 --------- | ----------------------------- | ---------------------------------------
@@ -91,20 +91,16 @@ If `true` it will show a "load more" legend text when `bonanza` has more items t
 
 The max number of rows expected, `10` by default.
 
+#### `options.scrollDistance`
+
+The distance in px before the bottom that will make `bonanza` start loading more items. `0` by default.
+
 #### `options.hasMoreItems`
 
 A function that helps to decide whatever the list being accesed has more items to display or not. By default is this function:
 
 ```js
 function (result) { return !!result.length && result.length === this.limit; }
-```
-
-#### `options.queryTransform`
-
-This can be used to transform what `bonanza` send, and what you expect to receive from your callback. This will be also what your template receives for the `loading` template. By default, this option has this function:
-
-```js
-function (query) { return query; }
 ```
 
 #### `options.getItems`

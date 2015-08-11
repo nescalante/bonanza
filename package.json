@@ -5,8 +5,8 @@
   "main": "bonanza.js",
   "scripts": {
     "test": "jshint src/*.js --reporter node_modules/jshint-stylish/stylish.js && tape tests/**/*.js",
-    "build": "npm run test; browserify bonanza.js -d -o dist/bonanza.js; uglify -s dist/bonanza.js -o dist/bonanza.min.js && cleancss dist/bonanza.css -o dist/bonanza.min.css",
-    "start": "watchify bonanza.js -d -o dist/bonanza.js"
+    "build": "npm run test; browserify bonanza.js -d -o dist/bonanza.js; uglify -s dist/bonanza.js -o dist/bonanza.min.js && cleancss dist/bonanza.css -o dist/bonanza.min.css && browserify demo/index.js -o demo/demo.js;",
+    "start": "watchify demo/index.js -o demo/demo.js"
   },
   "repository": {
     "type": "git",

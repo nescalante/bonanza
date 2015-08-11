@@ -1,11 +1,11 @@
 'use strict';
 
-var render = require('mustache').render;
 var EventEmitter = require('events').EventEmitter;
 var dom = require('./dom.js');
 var defaults = require('./defaults.js');
-var list = require('./list.js');
 var keys = require('./keys.js');
+var list = require('./list.js');
+var render = require('./render.js');
 var util = require('./util.js');
 
 bonanza.defaults = defaults;
@@ -14,12 +14,33 @@ global.bonanza = bonanza;
 module.exports = bonanza;
 
 function bonanza(element, options, callback) {
+  var array;
+
   if (!callback) {
     callback = options;
     options = {};
   }
 
+  if (Array.isArray(callback)) {
+    array = callback;
+    callback = function (query, done) {
+      var result = array
+        .filter(function (item) {
+          var desc = render(options.templates.label, item, false);
+
+          return new RegExp(query.search, 'i').test(desc);
+        })
+        .slice(query.offset, query.offset + query.limit);
+
+      done(null, result);
+    };
+  }
+
   if (options.templates) {
+    if (options.templates.item && options.templates.label === undefined) {
+      options.templates.label = options.templates.item;
+    }
+
     options.templates = util.merge(defaults.templates, options.templates);
   }
 
@@ -46,7 +67,7 @@ function bonanza(element, options, callback) {
   container.addEventListener('scroll', function (e) {
     var bottom = e.target.scrollTop + e.target.clientHeight - e.target.scrollHeight;
 
-    if (bottom >= 0 && dataList.hasMoreItems() && initialState) {
+    if (bottom >= (-1 * options.scrollDistance) && dataList.hasMoreItems() && initialState) {
       context.emit('search', { offset: dataList.items.length, limit: options.limit, search: initialState.searchTerm });
     }
   });
@@ -57,6 +78,7 @@ function bonanza(element, options, callback) {
 
   context.on('focus', function () {
     if (options.openOnFocus) {
+      process.nextTick(element.setSelectionRange.bind(element, 0, element.value.length));
       context.emit('search', { offset: 0, limit: options.limit, search: element.value });
     }
   });
@@ -69,7 +91,7 @@ function bonanza(element, options, callback) {
 
   context.on('change', function (item, elem) {
     if (item) {
-      element.value = render(options.templates.label, item);
+      element.value = render(options.templates.label, item, false);
     }
 
     initialState = null;
@@ -83,7 +105,7 @@ function bonanza(element, options, callback) {
 
     if (data && itemElem) {
       selectedItem = { data: data, element: itemElem };
-      element.value = render(options.templates.label, data);
+      element.value = render(options.templates.label, data, false);
       dom.addClass(itemElem, options.css.selected);
       var top = itemElem.offsetTop;
       var bottom = itemElem.offsetTop + itemElem.offsetHeight;
@@ -113,8 +135,6 @@ function bonanza(element, options, callback) {
   });
 
   context.on('search', function (query) {
-    var transQuery = options.queryTransform(query);
-
     if (lastQuery && lastQuery.search === query.search && lastQuery.offset === query.offset) {
       return;
     }
@@ -124,16 +144,16 @@ function bonanza(element, options, callback) {
     }
 
     if (!dataList.items.length && options.showLoading) {
-      dataList.showLoading(transQuery);
+      dataList.showLoading(query);
       context.emit('open');
     }
     else if (dataList.items.length && query.offset) {
-      dataList.showLoading(transQuery);
+      dataList.showLoading(query);
     }
 
     dom.addClass(element, options.css.inputLoading);
     lastQuery = query;
-    callback(transQuery, function (err, result) {
+    callback(query, function (err, result) {
       if (err) {
         context.emit('error', err);
         return;
@@ -144,19 +164,19 @@ function bonanza(element, options, callback) {
           dataList.clean();
         }
 
-        context.emit('success', result, transQuery, query.search);
+        context.emit('success', result, query);
       }
     });
   });
 
-  context.on('success', function (result, query, search) {
+  context.on('success', function (result, query) {
     var items = options.getItems(result);
 
     if (items) {
       context.emit('open');
 
       items.forEach(function (item) {
-        dataList.push(item, search);
+        dataList.push(item, query.search);
       });
 
       if (options.hasMoreItems(result)) {

@@ -1,0 +1,96 @@
+div, ul, li, h1, h2, h3, h4 {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #eea;
+  font-family: 'Ubuntu';
+  font-size: 14px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 64px;
+  margin: 15px 0 0;
+}
+
+h3 {
+  font-size: 24px;
+  color: #521;
+}
+
+h2, h3 {
+  text-align: center;
+}
+
+p {
+  font-size: 16px;
+}
+
+a {
+  color: #c31;
+}
+
+.bonanza {
+  font-family: 'Indie Flower';
+  color: #c31;
+  text-shadow: 1px 1px 1px #511;
+}
+
+h2.bonanza {
+  text-shadow: 2px 2px 1px #511;
+}
+
+.example {
+  padding: 20px;
+  margin: 40px 0;
+  background-color: #fda;
+}
+
+.example input[type=text] {
+  width: 230px;
+  margin: 10px 0;
+}
+
+pre {
+  background-color: #fb9;
+  padding: 10px 20px 0;
+  margin: 20px 0;
+  overflow: auto;
+}
+
+input[type="text"] {
+  padding: 5px;
+  font-size: 14px;
+}
+
+.bz-container {
+  box-shadow: 3px 3px 3px #333;
+  border: 1px solid #333;
+}
+
+.bz-list-loading, .bz-list-load-more, .bz-list-no-results {
+  padding: 8px;
+  color: #666;
+}
+
+.bz-list-item:hover {
+  background-color: #357;
+  color: #fff;
+}
+
+.bz-list-item.bz-list-item-selected {
+  background-color: #def;
+}
+
+.bz-list-item.bz-list-item-selected:hover {
+  background-color: #89a;
+  color: #fff;
+}
+
+.bz-text-match {
+  font-weight: bold;
+  text-decoration: underline;
+}

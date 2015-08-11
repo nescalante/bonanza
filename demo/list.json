@@ -1,0 +1,490 @@
+[
+  {
+    "firstName": "Abraham",
+    "lastName": "Simpson"
+  },
+  {
+    "firstName": "Agnes",
+    "lastName": "Skinner"
+  },
+  {
+    "firstName": "Albert",
+    "lastName": "Brooks"
+  },
+  {
+    "firstName": "Allison",
+    "lastName": "Taylor"
+  },
+  {
+    "firstName": "Amber",
+    "lastName": "Simpson"
+  },
+  {
+    "firstName": "Apu",
+    "lastName": "Nahasapeemapetilon"
+  },
+  {
+    "firstName": "Aristotle",
+    "lastName": "Amadopolis"
+  },
+  {
+    "firstName": "Arnie",
+    "lastName": "Pye"
+  },
+  {
+    "firstName": "Artie",
+    "lastName": "Ziff"
+  },
+  {
+    "firstName": "Atkins",
+    "lastName": "State  Comptroller"
+  },
+  {
+    "firstName": "Baby",
+    "lastName": "Gerald"
+  },
+  {
+    "firstName": "Barney",
+    "lastName": "Gumble"
+  },
+  {
+    "firstName": "Bart",
+    "lastName": "Simpson"
+  },
+  {
+    "firstName": "Bernice",
+    "lastName": "Hibbert"
+  },
+  {
+    "firstName": "Birchibald 'Birch'",
+    "lastName": "T. Barlow"
+  },
+  {
+    "firstName": "Bleeding Gums",
+    "lastName": "Murphy"
+  },
+  {
+    "firstName": "Brandine",
+    "lastName": "Spuckler"
+  },
+  {
+    "firstName": "Bumblebee",
+    "lastName": "Man"
+  },
+  {
+    "firstName": "Capital City",
+    "lastName": "Goofball"
+  },
+  {
+    "firstName": "Carl",
+    "lastName": "Carlson"
+  },
+  {
+    "firstName": "Cecil",
+    "lastName": "Terwilliger"
+  },
+  {
+    "firstName": "Charles Montgomery",
+    "lastName": "Burns"
+  },
+  {
+    "firstName": "Clancy",
+    "lastName": "Wiggum"
+  },
+  {
+    "firstName": "Cletus",
+    "lastName": "Spuckler"
+  },
+  {
+    "firstName": "Coach",
+    "lastName": "Lugash"
+  },
+  {
+    "firstName": "Comic Book",
+    "lastName": "Guy"
+  },
+  {
+    "firstName": "Constance",
+    "lastName": "Harm"
+  },
+  {
+    "firstName": "Cookie",
+    "lastName": "Kwan"
+  },
+  {
+    "firstName": "Crazy Cat",
+    "lastName": "Lady"
+  },
+  {
+    "firstName": "Dave",
+    "lastName": "Shutton"
+  },
+  {
+    "firstName": "Declan",
+    "lastName": "Desmond"
+  },
+  {
+    "firstName": "Dewey",
+    "lastName": "Largo"
+  },
+  {
+    "firstName": "Disco",
+    "lastName": "Stu"
+  },
+  {
+    "firstName": "Drederick",
+    "lastName": "Tatum"
+  },
+  {
+    "firstName": "Edna",
+    "lastName": "Krabappel"
+  },
+  {
+    "firstName": "Elizabeth",
+    "lastName": "Hoover"
+  },
+  {
+    "firstName": "Fat",
+    "lastName": "Tony"
+  },
+  {
+    "firstName": "Frankie",
+    "lastName": "the Squealer"
+  },
+  {
+    "firstName": "Gary",
+    "lastName": "Chalmers"
+  },
+  {
+    "firstName": "Gil",
+    "lastName": "Gunderson"
+  },
+  {
+    "firstName": "Groundskeeper",
+    "lastName": "Willie"
+  },
+  {
+    "firstName": "Hank",
+    "lastName": "Azaria"
+  },
+  {
+    "firstName": "Hans",
+    "lastName": "Moleman"
+  },
+  {
+    "firstName": "Helen",
+    "lastName": "Lovejoy"
+  },
+  {
+    "firstName": "Herbert",
+    "lastName": "Powell"
+  },
+  {
+    "firstName": "Herman",
+    "lastName": "Hermann"
+  },
+  {
+    "firstName": "Herschel",
+    "lastName": "Krustofski"
+  },
+  {
+    "firstName": "Homer",
+    "lastName": "Simpson"
+  },
+  {
+    "firstName": "Horatio",
+    "lastName": "McCallister"
+  },
+  {
+    "firstName": "Hyman",
+    "lastName": "Krustofski"
+  },
+  {
+    "firstName": "J. Loren",
+    "lastName": "Pryor"
+  },
+  {
+    "firstName": "Jacqueline",
+    "lastName": "Bouvier"
+  },
+  {
+    "firstName": "Janey",
+    "lastName": "Powell"
+  },
+  {
+    "firstName": "Jasper",
+    "lastName": "Beardly"
+  },
+  {
+    "firstName": "Jebediah",
+    "lastName": "Springfield"
+  },
+  {
+    "firstName": "Jimbo",
+    "lastName": "Jones"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Frink"
+  },
+  {
+    "firstName": "Johnny",
+    "lastName": "Tightlips"
+  },
+  {
+    "firstName": "Julius",
+    "lastName": "Hibbert"
+  },
+  {
+    "firstName": "Kearney",
+    "lastName": "Zzyzwicz"
+  },
+  {
+    "firstName": "Kent",
+    "lastName": "Brockman"
+  },
+  {
+    "firstName": "Kirk",
+    "lastName": "Van Houten"
+  },
+  {
+    "firstName": "Lance",
+    "lastName": "Murdock"
+  },
+  {
+    "firstName": "Lenny",
+    "lastName": "Leonard"
+  },
+  {
+    "firstName": "Lindsey",
+    "lastName": "Naegle"
+  },
+  {
+    "firstName": "Ling",
+    "lastName": "Bouvier"
+  },
+  {
+    "firstName": "Lionel",
+    "lastName": "Hutz"
+  },
+  {
+    "firstName": "Lisa",
+    "lastName": "Simpson"
+  },
+  {
+    "firstName": "Lois",
+    "lastName": "Pennycandy"
+  },
+  {
+    "firstName": "Luann",
+    "lastName": "Van Houten"
+  },
+  {
+    "firstName": "Lunchlady",
+    "lastName": "Doris"
+  },
+  {
+    "firstName": "Lurleen",
+    "lastName": "Lumpkin"
+  },
+  {
+    "firstName": "Maggie",
+    "lastName": "Simpson"
+  },
+  {
+    "firstName": "Manjula",
+    "lastName": "Nahasapeemapetilon"
+  },
+  {
+    "firstName": "Marge",
+    "lastName": "Simpson"
+  },
+  {
+    "firstName": "Martin",
+    "lastName": "Prince"
+  },
+  {
+    "firstName": "Marvin",
+    "lastName": "Monroe"
+  },
+  {
+    "firstName": "Mary",
+    "lastName": "Bailey"
+  },
+  {
+    "firstName": "Maude",
+    "lastName": "Flanders"
+  },
+  {
+    "firstName": "Mayor 'Diamond  Joe'",
+    "lastName": "Quimby"
+  },
+  {
+    "firstName": "Milhouse",
+    "lastName": "Van Houten"
+  },
+  {
+    "firstName": "Moe",
+    "lastName": "Szyslak"
+  },
+  {
+    "firstName": "Mona",
+    "lastName": "Simpson"
+  },
+  {
+    "firstName": "Mr",
+    "lastName": " Teeny"
+  },
+  {
+    "firstName": "Mr.",
+    "lastName": " Costington"
+  },
+  {
+    "firstName": "Mrs",
+    "lastName": " Glick"
+  },
+  {
+    "firstName": "Ms.",
+    "lastName": "Albright"
+  },
+  {
+    "firstName": "Ned",
+    "lastName": "Flanders"
+  },
+  {
+    "firstName": "Nelson",
+    "lastName": "Muntz"
+  },
+  {
+    "firstName": "Nick",
+    "lastName": "Riviera"
+  },
+  {
+    "firstName": "Old",
+    "lastName": "Barber"
+  },
+  {
+    "firstName": "Old",
+    "lastName": "Jewish Man"
+  },
+  {
+    "firstName": "Otto",
+    "lastName": "Mann"
+  },
+  {
+    "firstName": "Patches",
+    "lastName": "and Poor Violet"
+  },
+  {
+    "firstName": "Patty",
+    "lastName": "Bouvier"
+  },
+  {
+    "firstName": "Princess",
+    "lastName": "Kashmir"
+  },
+  {
+    "firstName": "Rachel",
+    "lastName": "Jordan"
+  },
+  {
+    "firstName": "Radioactive",
+    "lastName": "Man"
+  },
+  {
+    "firstName": "Rainier",
+    "lastName": "Wolfcastle"
+  },
+  {
+    "firstName": "Ralph",
+    "lastName": "Wiggum"
+  },
+  {
+    "firstName": "Rod",
+    "lastName": "Flanders"
+  },
+  {
+    "firstName": "Roger",
+    "lastName": "Meyers Jr."
+  },
+  {
+    "firstName": "Roy",
+    "lastName": "Snyder"
+  },
+  {
+    "firstName": "Ruth",
+    "lastName": "Powers"
+  },
+  {
+    "firstName": "Sanjay",
+    "lastName": "Nahasapeemapetilon"
+  },
+  {
+    "firstName": "Santa's",
+    "lastName": "Little Helper"
+  },
+  {
+    "firstName": "Sarah",
+    "lastName": "Wiggum"
+  },
+  {
+    "firstName": "Scott",
+    "lastName": "Christian"
+  },
+  {
+    "firstName": "Selma",
+    "lastName": "Bouvier"
+  },
+  {
+    "firstName": "Seymour",
+    "lastName": "Skinner"
+  },
+  {
+    "firstName": "Sideshow",
+    "lastName": "Bob"
+  },
+  {
+    "firstName": "Sideshow",
+    "lastName": "Mel"
+  },
+  {
+    "firstName": "Snake",
+    "lastName": "Jailbird"
+  },
+  {
+    "firstName": "Squeaky",
+    "lastName": "Voiced Teen"
+  },
+  {
+    "firstName": "The Happy",
+    "lastName": "Little Elves"
+  },
+  {
+    "firstName": "The Rich",
+    "lastName": "Texan"
+  },
+  {
+    "firstName": "Timothy",
+    "lastName": "Lovejoy"
+  },
+  {
+    "firstName": "Todd",
+    "lastName": "Flanders"
+  },
+  {
+    "firstName": "Troy",
+    "lastName": "McClure"
+  },
+  {
+    "firstName": "Waylon",
+    "lastName": "Smithers"
+  },
+  {
+    "firstName": "Wendell",
+    "lastName": "Borton"
+  },
+  {
+    "firstName": "Yes",
+    "lastName": "Guy"
+  }
+]

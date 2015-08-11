@@ -1,15 +1,106 @@
 <html>
 <head>
-  <link rel="stylesheet" href="dist/bonanza.css">
-  <link rel="stylesheet" href="example/example.css">
+  <link href="http://fonts.googleapis.com/css?family=Ubuntu|Indie+Flower" rel="stylesheet" type="text/css">
+  <link href="dist/bonanza.css" rel="stylesheet" type="text/css">
+  <link href="demo/demo.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div>
-    <p>Hello world</p>
-    <input id="bonanza" type="text" />
-    <p>Info here</p>
+  <h2 class="bonanza">Bonanza</h2>
+  <h3>Helps your users find what they need</h3>
+
+  <div class="example">
+    <p>Easy to get started!</p>
+    <input id="example1" type="text" placeholder="Type a Simpsons child name" />
+    <p>Source:</p>
+    <pre>
+<code>
+bonanza(document.querySelector('input'), ['Bart', 'Lisa', 'Maggie']);
+</code>
+    </pre>
+  </div>
+  <div class="example">
+    <p>Use callbacks when you need to bring large data from the server (or wherever)</p>
+    <input id="example2" type="text" placeholder="Type a character" />
+    <p>Source:</p>
+    <pre>
+<code>
+bonanza(document.querySelector('input'), function (query, done) {
+  request
+    .get('/search?term=' + query.search + '&offset=' + query.offset + '&limit=' + query.limit)
+    .on('response', function (res) {
+      done(null, res.body);
+    })
+    .on('error', function (err) {
+      done(err);
+    });
+});
+</code>
+    </pre>
+    <p>Since <span class="bonanza">bonanza</span> works with pagination, you can scroll your results down the list and get them on demand!
+  </div>
+  <div class="example">
+    <p>You can use <a href="https://mustache.github.io/">mustache</a> templates when working with objects instead of just strings</p>
+    <input id="example3" type="text" placeholder="Type a character" />
+    <p>Sample data:</p>
+    <pre>
+<code>
+[{
+  "firstName": "Abraham",
+  "lastName": "Simpson"
+}, {
+  "firstName": "Apu",
+  "lastName": "Nahasapeemapetilon"
+}, {
+  "firstName": "Artie",
+  "lastName": "Ziff"
+}, ... more items ... ]
+</code>
+    </pre>
+    <p>Source:</p>
+    <pre>
+<code>
+var options = { templates: { item: '{{firstName}} {{lastName}}' } };
+
+bonanza(document.querySelector('input'), options, function (query, done) {
+  request
+    .get('/search?term=' + query.search + '&offset=' + query.offset + '&limit=' + query.limit)
+    .on('response', function (res) {
+      done(null, res.body);
+    })
+    .on('error', function (err) {
+      done(err);
+    });
+});
+</code>
+    </pre>
+    <p>Of course you can use your arrow keys to happily navigate through the results!</p>
+  </div>
+  <div class="example">
+    <p>Listen to the events to know what happens inside <span class="bonanza">bonanza</span></p>
+    <input id="example4" type="text" placeholder="Type a character" />
+    <p>Source:</p>
+    <pre>
+<code>
+bonanza(document.querySelector('input'), options, function (query, done) {
+  request
+    .get('/search?term=' + query.search + '&offset=' + query.offset + '&limit=' + query.limit)
+    .on('response', function (res) {
+      done(null, res.body);
+    })
+    .on('error', function (err) {
+      done(err);
+    });
+}).on('change', function (item) {
+  alert(JSON.stringify(item));
+});
+</code>
+    </pre>
+  </div>
+  <div class="example">
+    <h3>Get it today from <a href="https://github.com/nescalante/bonanza">GitHub</a>!</h3>
+  </div>
 </div>
-<script src="dist/bonanza.js"></script>
-<script src="example/example.js"></script>
+<script src="demo/demo.js"></script>
 </body>
 </html>
