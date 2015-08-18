@@ -1769,7 +1769,6 @@ function bonanza(element, options, callback) {
   });
 
   context.on('open', function () {
-    console.log('popen');
     dom.removeClass(container, options.css.hide);
     container.style.top = (element.offsetTop + element.offsetHeight) + 'px';
     container.style.left = (element.offsetLeft) + 'px';
