@@ -145,7 +145,10 @@ function bonanza(element, options, callback) {
 
     if (!dataList.items.length && options.showLoading) {
       dataList.showLoading(query);
-      context.emit('open');
+
+      if (!isVisible()) {
+        context.emit('open');
+      }
     }
     else if (dataList.items.length && query.offset) {
       dataList.showLoading(query);
@@ -173,7 +176,9 @@ function bonanza(element, options, callback) {
     var items = options.getItems(result);
 
     if (items) {
-      context.emit('open');
+      if (!isVisible()) {
+        context.emit('open');
+      }
 
       items.forEach(function (item) {
         dataList.push(item, query.search);
@@ -211,7 +216,9 @@ function bonanza(element, options, callback) {
     var lastIndex, nodeIndex;
     var key = keys[e.keyCode];
 
-    context.emit('open');
+    if (!isVisible()) {
+      context.emit('open');
+    }
 
     if (selectedItem) {
       lastIndex =  dataList.items.indexOf(dataList.items.filter(function (item) { return item.data === selectedItem.data; })[0]);
@@ -268,4 +275,8 @@ function bonanza(element, options, callback) {
   });
 
   return context;
+
+  function isVisible() {
+    return !dom.hasClass(container, options.css.hide);
+  }
 }

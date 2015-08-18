@@ -1652,7 +1652,8 @@ module.exports = {
 
 module.exports = {
   addClass: addClass,
-  removeClass: removeClass
+  removeClass: removeClass,
+  hasClass: hasClass
 };
 
 function addClass(element, className) {
@@ -1660,9 +1661,7 @@ function addClass(element, className) {
     return;
   }
 
-  var classes = element.className.split(' ');
-
-  if (classes.indexOf(className) === -1) {
+  if (!hasClass(element, className)) {
     element.className = (element.className + (element.className ? ' ' : '') + className);
   }
 }
@@ -1674,6 +1673,12 @@ function removeClass(element, className) {
 
   var classRegex = new RegExp('\\b' + className + '\\b', 'g');
   element.className = element.className.replace(classRegex, '').replace(/  /g, ' ').trim();
+}
+
+function hasClass(element, className) {
+  var classes = element.className.split(' ');
+
+  return classes.indexOf(className) !== -1;
 }
 
 },{}],12:[function(require,module,exports){
@@ -1764,6 +1769,7 @@ function bonanza(element, options, callback) {
   });
 
   context.on('open', function () {
+    console.log('popen');
     dom.removeClass(container, options.css.hide);
     container.style.top = (element.offsetTop + element.offsetHeight) + 'px';
     container.style.left = (element.offsetLeft) + 'px';
@@ -1825,7 +1831,10 @@ function bonanza(element, options, callback) {
 
     if (!dataList.items.length && options.showLoading) {
       dataList.showLoading(query);
-      context.emit('open');
+
+      if (!isVisible()) {
+        context.emit('open');
+      }
     }
     else if (dataList.items.length && query.offset) {
       dataList.showLoading(query);
@@ -1853,7 +1862,9 @@ function bonanza(element, options, callback) {
     var items = options.getItems(result);
 
     if (items) {
-      context.emit('open');
+      if (!isVisible()) {
+        context.emit('open');
+      }
 
       items.forEach(function (item) {
         dataList.push(item, query.search);
@@ -1891,7 +1902,9 @@ function bonanza(element, options, callback) {
     var lastIndex, nodeIndex;
     var key = keys[e.keyCode];
 
-    context.emit('open');
+    if (!isVisible()) {
+      context.emit('open');
+    }
 
     if (selectedItem) {
       lastIndex =  dataList.items.indexOf(dataList.items.filter(function (item) { return item.data === selectedItem.data; })[0]);
@@ -1948,6 +1961,10 @@ function bonanza(element, options, callback) {
   });
 
   return context;
+
+  function isVisible() {
+    return !dom.hasClass(container, options.css.hide);
+  }
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
