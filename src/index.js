@@ -16,9 +16,17 @@ module.exports = bonanza;
 function bonanza(element, options, callback) {
   var array;
 
+  if (!element) {
+    throw new Error('An element is required to initialize bonanza');
+  }
+
   if (!callback) {
     callback = options;
     options = {};
+  }
+
+  if (!callback) {
+    throw new Error('A source is required to initialize bonanza');
   }
 
   if (Array.isArray(callback)) {

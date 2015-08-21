@@ -4,7 +4,7 @@
   "description": "Customizable autocomplete for really large collections",
   "main": "bonanza.js",
   "scripts": {
-    "test": "jshint src/*.js --reporter node_modules/jshint-stylish/stylish.js && tape tests/**/*.js",
+    "test": "jshint src/*.js --reporter node_modules/jshint-stylish/stylish.js && browserify tests/*.js | tape-run | faucet",
     "build": "npm run test; browserify bonanza.js -d -o dist/bonanza.js; uglify -s dist/bonanza.js -o dist/bonanza.min.js && cleancss dist/bonanza.css -o dist/bonanza.min.css && browserify demo/index.js -o demo/demo.js;",
     "start": "watchify demo/index.js -o demo/demo.js"
   },
@@ -25,9 +25,11 @@
   "devDependencies": {
     "browserify": "^11.0.1",
     "clean-css": "^3.3.8",
+    "faucet": "0.0.1",
     "jshint": "~2.6.0",
     "jshint-stylish": "~1.0.0",
-    "tape": "^4.0.0",
+    "tape": "^4.2.0",
+    "tape-run": "^1.1.0",
     "watchify": "^3.3.1"
   },
   "dependencies": {
