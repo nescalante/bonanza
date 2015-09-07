@@ -1,4 +1,4 @@
-# Bonanza
+# Bonanza [![Build Status](https://travis-ci.org/nescalante/bonanza.svg?branch=master)](https://travis-ci.org/nescalante/bonanza)
 
 > Customizable autocomplete for really large collections
 
