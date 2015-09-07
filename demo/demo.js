@@ -1701,9 +1701,17 @@ module.exports = bonanza;
 function bonanza(element, options, callback) {
   var array;
 
+  if (!element) {
+    throw new Error('An element is required to initialize bonanza');
+  }
+
   if (!callback) {
     callback = options;
     options = {};
+  }
+
+  if (!callback) {
+    throw new Error('A source is required to initialize bonanza');
   }
 
   if (Array.isArray(callback)) {
@@ -1756,6 +1764,20 @@ function bonanza(element, options, callback) {
       context.emit('search', { offset: dataList.items.length, limit: options.limit, search: initialState.searchTerm });
     }
   });
+
+  container.onmousewheel = function (e) {
+    var bottom = (container.scrollTop + container.clientHeight - container.scrollHeight) === 0;
+    var top = container.scrollTop === 0;
+    var direction = event.wheelDelta;
+
+    if ((bottom && direction < 1) || (top && direction > 1)) {
+      e.stopPropagation();
+      e.preventDefault();
+      e.returnValue = false;
+
+      return false;
+    }
+  };
 
   element.addEventListener('focus', function () {
     context.emit('focus');

@@ -80,6 +80,20 @@ function bonanza(element, options, callback) {
     }
   });
 
+  container.onmousewheel = function (e) {
+    var bottom = (container.scrollTop + container.clientHeight - container.scrollHeight) === 0;
+    var top = container.scrollTop === 0;
+    var direction = event.wheelDelta;
+
+    if ((bottom && direction < 1) || (top && direction > 1)) {
+      e.stopPropagation();
+      e.preventDefault();
+      e.returnValue = false;
+
+      return false;
+    }
+  };
+
   element.addEventListener('focus', function () {
     context.emit('focus');
   });

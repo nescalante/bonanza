@@ -6,6 +6,14 @@ function createInput() {
   return input;
 }
 
+function keyUp(element, key) {
+  var ev = new KeyboardEvent('keyup', { key: key });
+
+  element.dispatchEvent(ev);
+  return ev;
+}
+
 module.exports = {
-  createInput: createInput
+  createInput: createInput,
+  keyUp: keyUp
 };
