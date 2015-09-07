@@ -7,7 +7,9 @@ function createInput() {
 }
 
 function keyUp(element, key) {
-  var ev = new KeyboardEvent('keyup', { key: key });
+  element.value = key;
+  var ev = document.createEvent('KeyboardEvent');
+  ev.initKeyboardEvent('keyup', true, true, null, key, key, null, null, null);
 
   element.dispatchEvent(ev);
   return ev;
