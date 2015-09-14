@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jshint src/*.js --reporter node_modules/jshint-stylish/stylish.js && browserify tests/*.js | tape-run | faucet",
     "build": "npm run test; browserify bonanza.js -d -o dist/bonanza.js; uglify -s dist/bonanza.js -o dist/bonanza.min.js && cleancss dist/bonanza.css -o dist/bonanza.min.css && browserify demo/index.js -o demo/demo.js;",
-    "start": "watchify demo/index.js -o demo/demo.js"
+    "start": "static & watchify demo/index.js -o demo/demo.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "faucet": "0.0.1",
     "jshint": "~2.6.0",
     "jshint-stylish": "~1.0.0",
+    "node-static": "^0.7.7",
     "tape": "^4.2.0",
     "tape-run": "^1.1.0",
     "watchify": "^3.3.1"
