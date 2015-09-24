@@ -2032,11 +2032,15 @@ function createList(context, options) {
   };
 
   function pushItem(info, search) {
+    var regExp;
     var itemElem = appendElement(options.templates.item, options.css.item, info);
     var item = { data: info, element: itemElem };
-    var regExp = new RegExp(search, 'ig');
 
-    itemElem.innerHTML = itemElem.innerHTML.replace(regExp, highlight);
+    if (search) {
+      regExp = new RegExp(escapeRegExp(search), 'ig');
+      itemElem.innerHTML = itemElem.innerHTML.replace(regExp, highlight);
+    }
+
     itemElem.addEventListener('mousedown', function (e) {
       context.emit('change', info, itemElem);
     });
@@ -2044,6 +2048,10 @@ function createList(context, options) {
     hideLoading();
     list.appendChild(itemElem);
     items.push(item);
+  }
+
+  function escapeRegExp (str) {
+    return str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
   }
 
   function highlight (str) {

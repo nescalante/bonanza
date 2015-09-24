@@ -1,6 +1,8 @@
 function createInput() {
   var input = document.createElement('input');
   input.type = 'text';
+  input.setSelectionRange = { bind: Function.prototype };
+  input.value = '';
 
   document.body.appendChild(input);
   return input;
