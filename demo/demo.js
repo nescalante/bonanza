@@ -7,7 +7,7 @@ module.exports = function () {
   bonanza(document.querySelector('#example1'), ['Bart', 'Lisa', 'Maggie']);
 };
 
-},{"../src":12}],2:[function(require,module,exports){
+},{"../src":11}],2:[function(require,module,exports){
 'use strict';
 
 var bonanza = require('../src');
@@ -34,7 +34,7 @@ function request(query, done) {
   }, 300);
 }
 
-},{"../src":12,"./list.json":6}],3:[function(require,module,exports){
+},{"../src":11,"./list.json":6}],3:[function(require,module,exports){
 'use strict';
 
 var bonanza = require('../src');
@@ -58,7 +58,7 @@ function request(query, done) {
   }, 300);
 }
 
-},{"../src":12,"./list.json":6}],4:[function(require,module,exports){
+},{"../src":11,"./list.json":6}],4:[function(require,module,exports){
 'use strict';
 
 var bonanza = require('../src');
@@ -86,7 +86,7 @@ function request(query, done) {
   }, 300);
 }
 
-},{"../src":12,"./list.json":6}],5:[function(require,module,exports){
+},{"../src":11,"./list.json":6}],5:[function(require,module,exports){
 'use strict';
 
 require('./example1.js')();
@@ -890,98 +890,6 @@ function isUndefined(arg) {
 }
 
 },{}],8:[function(require,module,exports){
-// shim for using process in browser
-
-var process = module.exports = {};
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = setTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            currentQueue[queueIndex].run();
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    clearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        setTimeout(drainQueue, 0);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-// TODO(shtylman)
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-},{}],9:[function(require,module,exports){
 /*!
  * mustache.js - Logic-less {{mustache}} templates with JavaScript
  * http://github.com/janl/mustache.js
@@ -1610,7 +1518,7 @@ process.umask = function() { return 0; };
 
 }));
 
-},{}],10:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 var css = {
@@ -1647,7 +1555,7 @@ module.exports = {
   closeOnBlur: true
 };
 
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -1681,8 +1589,8 @@ function hasClass(element, className) {
   return classes.indexOf(className) !== -1;
 }
 
-},{}],12:[function(require,module,exports){
-(function (process,global){
+},{}],11:[function(require,module,exports){
+(function (global){
 'use strict';
 
 var EventEmitter = require('events').EventEmitter;
@@ -1833,7 +1741,7 @@ function bonanza(element, options, callback) {
 
   context.on('focus', function () {
     if (options.openOnFocus) {
-      process.nextTick(element.setSelectionRange.bind(element, 0, element.value.length));
+      setTimeout(element.setSelectionRange.bind(element, 0, element.value.length), 0);
       context.emit('search', { offset: 0, limit: options.limit, search: element.value });
     }
   });
@@ -1987,8 +1895,8 @@ function bonanza(element, options, callback) {
   }
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./defaults.js":10,"./dom.js":11,"./keys.js":13,"./list.js":14,"./render.js":15,"./util.js":16,"_process":8,"events":7}],13:[function(require,module,exports){
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./defaults.js":9,"./dom.js":10,"./keys.js":12,"./list.js":13,"./render.js":14,"./util.js":15,"events":7}],12:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -1998,7 +1906,7 @@ module.exports = {
   '27': 'escape'
 };
 
-},{}],14:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
 var dom = require('./dom.js');
@@ -2130,7 +2038,7 @@ function createList(context, options) {
   }
 }
 
-},{"./dom.js":11,"./render.js":15,"./util.js":16}],15:[function(require,module,exports){
+},{"./dom.js":10,"./render.js":14,"./util.js":15}],14:[function(require,module,exports){
 'use strict';
 
 var mustache = require('mustache');
@@ -2166,7 +2074,7 @@ function unescapeHtmlChar(chr) {
   return htmlUnescapes[chr];
 }
 
-},{"mustache":9}],16:[function(require,module,exports){
+},{"mustache":8}],15:[function(require,module,exports){
 'use strict';
 
 module.exports = {

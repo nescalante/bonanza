@@ -1,11 +1,11 @@
 'use strict';
 
-var test = require('tape-catch');
+var test = require('tape');
 var bonanza = require('../src');
-var utils = require('./utils.js')
+var util = require('./util');
 
 test('show list on focus', function (t) {
-  var input = utils.createInput();
+  var input = util.createInput();
   var b = createBasicList(input);
   var list;
 
@@ -22,7 +22,7 @@ test('show list on focus', function (t) {
 });
 
 test('show list on open', function (t) {
-  var input = utils.createInput();
+  var input = util.createInput();
   var b = createBasicList(input);
 
   t.equal(b.container.className, 'bz-container bz-hide');
@@ -35,7 +35,7 @@ test('show list on open', function (t) {
 });
 
 test('hide list on close', function (t) {
-  var input = utils.createInput();
+  var input = util.createInput();
   var b = createBasicList(input);
   var list;
 
@@ -50,7 +50,7 @@ test('hide list on close', function (t) {
 });
 
 test('update element value on change', function (t) {
-  var input = utils.createInput();
+  var input = util.createInput();
   var b = createBasicList(input);
 
   b.emit('change', 'foo');
@@ -62,7 +62,7 @@ test('update element value on change', function (t) {
 });
 
 test('highlight item on select', function (t) {
-  var input = utils.createInput();
+  var input = util.createInput();
   var b = createBasicList(input);
   var list;
 

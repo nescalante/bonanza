@@ -148,7 +148,7 @@ function bonanza(element, options, callback) {
 
   context.on('focus', function () {
     if (options.openOnFocus) {
-      process.nextTick(element.setSelectionRange.bind(element, 0, element.value.length));
+      setTimeout(element.setSelectionRange.bind(element, 0, element.value.length), 0);
       context.emit('search', { offset: 0, limit: options.limit, search: element.value });
     }
   });

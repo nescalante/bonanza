@@ -17,6 +17,8 @@ function keyUp(element, key) {
   return ev;
 }
 
+function noop() {}
+
 module.exports = {
   createInput: createInput,
   keyUp: keyUp

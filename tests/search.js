@@ -2,14 +2,14 @@
 
 var test = require('tape');
 var bonanza = require('../src');
-var utils = require('./utils.js')
+var util = require('./util');
 
 test('do search when typing', function (t) {
-  var input = utils.createInput();
+  var input = util.createInput();
   var b = bonanza(input, ['foo', 'bar', 'baz']);
   var list;
 
-  utils.keyUp(input, 'b');
+  util.keyUp(input, 'b');
   list = b.container.children[0];
 
   t.equal(list.children.length, 2);
