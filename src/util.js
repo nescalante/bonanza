@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = {
-  merge: merge
+  merge: merge,
+  queryRegExp: queryRegExp
 };
 
 function merge(obj1, obj2) {
@@ -17,4 +18,12 @@ function merge(obj1, obj2) {
   }
 
   return result;
+}
+
+function queryRegExp(query) {
+  return new RegExp(escapeRegExp(query), 'ig');
+}
+
+function escapeRegExp (str) {
+  return str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 }

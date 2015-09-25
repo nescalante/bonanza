@@ -2,6 +2,7 @@
 
 var dom = require('./dom.js');
 var render = require('./render.js');
+var util = require('./util.js');
 
 module.exports = {
   create: createList
@@ -17,6 +18,7 @@ function createList(context, options) {
     push: pushItem,
     clean: cleanItems,
     items: items,
+    getByData: getByData,
     showLoading: showLoading,
     hideLoading: hideLoading,
     showLoadMore: showLoadMore,
@@ -30,7 +32,7 @@ function createList(context, options) {
     var item = { data: info, element: itemElem };
 
     if (search) {
-      regExp = new RegExp(escapeRegExp(search), 'ig');
+      regExp = util.queryRegExp(search);
       itemElem.innerHTML = itemElem.innerHTML.replace(regExp, highlight);
     }
 
@@ -43,10 +45,6 @@ function createList(context, options) {
     items.push(item);
   }
 
-  function escapeRegExp (str) {
-    return str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
-  }
-
   function highlight (str) {
     return '<span' + (options.css.match ? ' class="' + options.css.match + '"' : '') + '>' + str + '</span>';
   }
@@ -57,6 +55,10 @@ function createList(context, options) {
     loadMore = null;
     loading = null;
     noResults = null;
+  }
+
+  function getByData(data) {
+    return items.filter(function (item) { return item.data === data; })[0];
   }
 
   function showLoading(query) {
