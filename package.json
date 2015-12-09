@@ -8,7 +8,7 @@
     "build": "npm run test && browserify bonanza.js -d -o dist/bonanza.js && uglify -s dist/bonanza.js -o dist/bonanza.min.js && cleancss dist/bonanza.css -o dist/bonanza.min.css && browserify demo/index.js -o demo/demo.js",
     "start": "static & watchify demo/index.js -o demo/demo.js",
     "preversion": "npm run build && git commit --allow-empty -am 'pre-release commit'",
-    "postversion": "git push --tags"
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
