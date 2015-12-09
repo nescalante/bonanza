@@ -1,4 +1,11 @@
 language: node_js
-
 node_js:
-  - "0.10"
+- '0.10'
+deploy:
+  provider: npm
+  email: nlante@gmail.com
+  api_key:
+    secure: Zslcz00ynbvsqScwYeYyTq+jVn1WLwT96pRISasEa2rRMXdENIhBdyfWVmZJvO+e6F9b3xOeB1uAQX2a7Xw++W+TnQGl9T6TSd028Lvq8twFPnZzHJH0xhUD2KKn+vaiBpyyYFRJTysNEdosB0UEHSCgYIUSRcxlMVrb7qHdA5bB1X65IBlSQGF3s9wcx94xuyvEpfM8T9W2fkHecMi4AdXPLFXl6A8tFJc9rMoCfZYa9xaS9RGIQ0p7i+5ao87Bj1VezCTzkwOJ/I8VFSojWdYh5VjVVF4hZklSGa7plFS6BuLwTU+A4DQ0WFadKSn9XUFe9uMgePrBOzDqMpZ2or73Qkifgth8GkWG5Kh9N9hlpkDVVNtrtoBTm0emTavRMn3A9hoeG1819wzKgnGq9rWAHMlNJjebRwjSDBgaWF2zsXoYcPhaIaetQW26cDHbu6wcgPxkrGrwZXqXuqMWe8cpd0rGZf0pVd0mRzC7AkB4wFV8YZe+WhiY7pEsiUUmZtnmr6BhtysulccVOpA6oGXsmOGRWmkZ0CpMkPpw+jj+voc9dCRq+qo5EpiiP/QXZflmYp1/Iy61uOiOPZR2eJo+mQNS5i9K1t1LOEk+q+oywZ5C/U0ouaXTZWbxwM6csjLlCzqR4YcYf4vnBQkwu7R7vrSNnAi8LrbfTU3OaX0=
+  on:
+    tags: true
+    repo: nescalante/bonanza
