@@ -9,3 +9,4 @@ deploy:
   on:
     tags: true
     repo: nescalante/bonanza
+    all_branches: true
