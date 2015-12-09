@@ -1457,7 +1457,7 @@ function isUndefined(arg) {
   };
 
   mustache.name = 'mustache.js';
-  mustache.version = '2.1.3';
+  mustache.version = '2.2.0';
   mustache.tags = [ '{{', '}}' ];
 
   // All high-level mustache.* functions use this writer.

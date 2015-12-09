@@ -4,8 +4,8 @@
   "description": "Customizable autocomplete for really large collections",
   "main": "bonanza.js",
   "scripts": {
-    "test": "jshint src/*.js --reporter node_modules/jshint-stylish/stylish.js && browserify tests/*.js | tape-run",
-    "build": "npm run test; browserify bonanza.js -d -o dist/bonanza.js; uglify -s dist/bonanza.js -o dist/bonanza.min.js && cleancss dist/bonanza.css -o dist/bonanza.min.css && browserify demo/index.js -o demo/demo.js;",
+    "test": "jshint src/*.js && browserify tests/*.js | tape-run",
+    "build": "npm run test && browserify bonanza.js -d -o dist/bonanza.js && uglify -s dist/bonanza.js -o dist/bonanza.min.js && cleancss dist/bonanza.css -o dist/bonanza.min.css && browserify demo/index.js -o demo/demo.js",
     "start": "static & watchify demo/index.js -o demo/demo.js"
   },
   "repository": {
@@ -26,24 +26,13 @@
     "browserify": "^11.0.1",
     "clean-css": "^3.3.8",
     "jshint": "~2.6.0",
-    "jshint-stylish": "~1.0.0",
     "node-static": "^0.7.7",
     "tape": "^4.2.0",
     "tape-run": "^1.1.0",
-    "testling": "^1.7.1",
     "uglify": "^0.1.5",
     "watchify": "^3.3.1"
   },
   "dependencies": {
-    "mustache": "^2.1.3"
-  },
-  "testling": {
-    "files": "tests/*.js",
-    "browsers": [
-      "ie/11",
-      "firefox/latest",
-      "chrome/latest",
-      "safari/latest"
-    ]
+    "mustache": "^2.2.0"
   }
 }
