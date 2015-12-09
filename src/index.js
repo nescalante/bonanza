@@ -46,7 +46,7 @@ function bonanza(element, options, callback) {
   options = util.merge(defaults, options);
 
   var context = new EventEmitter();
-  var selectedItem, lastQuery, initialState;
+  var selectedItem, lastQuery, initialState, currentValue;
 
   var container = document.createElement('div');
   container.className = options.css.container || '';
@@ -80,6 +80,8 @@ function bonanza(element, options, callback) {
   });
 
   element.addEventListener('keyup', function (e) {
+    currentValue = null;
+
     if (!(e.keyCode.toString() in keys)) {
       showList();
       context.emit('search', { offset: 0, limit: options.limit, search: element.value });
@@ -149,7 +151,10 @@ function bonanza(element, options, callback) {
   context.on('focus', function () {
     if (options.openOnFocus) {
       setTimeout(element.setSelectionRange.bind(element, 0, element.value.length), 0);
-      context.emit('search', { offset: 0, limit: options.limit, search: element.value });
+
+      if (!currentValue) {
+        context.emit('search', { offset: 0, limit: options.limit, search: element.value });
+      }
     }
   });
 
@@ -167,6 +172,8 @@ function bonanza(element, options, callback) {
   });
 
   context.on('change', function (item) {
+    currentValue = item;
+
     if (item) {
       element.value = render(options.templates.label, item, false);
     }
