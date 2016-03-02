@@ -20,6 +20,10 @@ Or just download it from bower
 bower install bonanza --save
 ```
 
+# Angular support
+
+Just use [this package](https://github.com/nescalante/bonanza-ng) instead
+
 # Usage
 
 You just need an input to work on and a function (a.k.a. callback) that returns your favorite data
