@@ -135,6 +135,10 @@ search  | When starting to do a search
 success | When the search returns data
 error   | Every time an error sadly occurs
 
+# Contributing
+
+The `dist` folder as well as the version in the `package.json` file should *not* be modified. Create a PR with your changes and if needed a test asserting them. Once merged a new version will be uploaded to bower and npm with the `dist` folder updated.
+
 # License
 
 MIT
