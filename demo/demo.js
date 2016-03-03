@@ -1537,7 +1537,7 @@ var css = {
 var templates = {
   item: '{{.}}',
   label: '{{.}}',
-  noResults: 'No results for "{{search}}"',
+  noResults: 'No results {{#search}}for "{{/search}}{{search}}{{#search}}"{{/search}}',
   loadMore: '...',
   loading: 'Loading ...'
 };
