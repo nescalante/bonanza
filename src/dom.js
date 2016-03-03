@@ -3,7 +3,7 @@
 module.exports = {
   addClass: addClass,
   removeClass: removeClass,
-  hasClass: hasClass
+  hasClass: hasClass,
 };
 
 function addClass(element, className) {

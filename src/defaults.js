@@ -10,7 +10,7 @@ var css = {
   loadMore: 'bz-list-load-more',
   noResults: 'bz-list-no-results',
   inputLoading: 'bz-loading',
-  match: 'bz-text-match'
+  match: 'bz-text-match',
 };
 
 var templates = {
@@ -18,7 +18,7 @@ var templates = {
   label: '{{.}}',
   noResults: 'No results {{#search}}for "{{/search}}{{search}}{{#search}}"{{/search}}',
   loadMore: '...',
-  loading: 'Loading ...'
+  loading: 'Loading ...',
 };
 
 module.exports = {
@@ -30,6 +30,8 @@ module.exports = {
   limit: 10,
   scrollDistance: 0,
   hasMoreItems: function (result) { return !!result.length && result.length === this.limit; },
+
   getItems: function (result) { return result; },
-  closeOnBlur: true
+
+  closeOnBlur: true,
 };

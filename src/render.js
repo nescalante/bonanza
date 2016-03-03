@@ -10,19 +10,17 @@ var htmlUnescapes = {
   '&gt;': '>',
   '&quot;': '"',
   '&#39;': '\'',
-  '&#x2F;': '/'
+  '&#x2F;': '/',
 };
 var reHtmlUnescapes = /&(?:amp|lt|gt|quot|#39|#x2F);/g;
 
 function render(template, model, encode) {
   if (typeof template === 'function') {
     return template(model, encode);
-  }
-  else if (typeof template === 'string') {
+  } else if (typeof template === 'string') {
     if (encode) {
       return mustache.render(template, model);
-    }
-    else {
+    } else {
       return mustache.render(template, model)
         .replace(reHtmlUnescapes, unescapeHtmlChar);
     }

@@ -94,8 +94,7 @@ function bonanza(element, options, callback) {
 
     if (selectedItem) {
       lastIndex = dataList.items.indexOf(selectedItem);
-    }
-    else {
+    } else {
       lastIndex = 0;
     }
 
@@ -104,20 +103,16 @@ function bonanza(element, options, callback) {
 
       if (nodeIndex === -1 && dataList.hasMoreItems()) {
         nodeIndex = 0;
-      }
-      else if (nodeIndex < 0) {
+      } else if (nodeIndex < 0) {
         nodeIndex = dataList.items.length - 1;
       }
 
       showList();
       context.emit('select', dataList.items[nodeIndex].data);
-    }
-
-    else if (key === 'down') {
+    } else if (key === 'down') {
       if (selectedItem) {
         nodeIndex = lastIndex + 1;
-      }
-      else {
+      } else {
         nodeIndex = 0;
       }
 
@@ -133,17 +128,13 @@ function bonanza(element, options, callback) {
       if (dataList.items[nodeIndex]) {
         context.emit('select', dataList.items[nodeIndex].data);
       }
-    }
-
-    else if (key === 'enter' && isVisible()) {
+    } else if (key === 'enter' && isVisible()) {
       selectedItem = selectedItem || dataList.items[0];
 
       if (selectedItem) {
         context.emit('change', selectedItem.data);
       }
-    }
-
-    else if (key === 'escape' && isVisible()) {
+    } else if (key === 'escape' && isVisible()) {
       context.emit('cancel');
     }
   });
@@ -197,8 +188,7 @@ function bonanza(element, options, callback) {
 
       if (bottom > container.clientHeight + container.scrollTop) {
         container.scrollTop = selectedItem.element.offsetTop - container.clientHeight + selectedItem.element.offsetHeight;
-      }
-      else if (top < container.scrollTop) {
+      } else if (top < container.scrollTop) {
         container.scrollTop = selectedItem.element.offsetTop;
       }
     }
@@ -261,8 +251,7 @@ function bonanza(element, options, callback) {
 
       if (options.hasMoreItems(result)) {
         dataList.showLoadMore(result);
-      }
-      else if (!dataList.items.length) {
+      } else if (!dataList.items.length) {
         dataList.showNoResults(query);
       }
     }

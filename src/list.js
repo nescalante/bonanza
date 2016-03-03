@@ -5,7 +5,7 @@ var render = require('./render.js');
 var util = require('./util.js');
 
 module.exports = {
-  create: createList
+  create: createList,
 };
 
 function createList(context, options) {
@@ -23,7 +23,7 @@ function createList(context, options) {
     hideLoading: hideLoading,
     showLoadMore: showLoadMore,
     showNoResults: showNoResults,
-    hasMoreItems: hasMoreItems
+    hasMoreItems: hasMoreItems,
   };
 
   function pushItem(info, search) {
@@ -45,7 +45,7 @@ function createList(context, options) {
     items.push(item);
   }
 
-  function highlight (str) {
+  function highlight(str) {
     return '<span' + (options.css.match ? ' class="' + options.css.match + '"' : '') + '>' + str + '</span>';
   }
 
