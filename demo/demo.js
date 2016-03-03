@@ -1530,7 +1530,7 @@ var css = {
   loadMore: 'bz-list-load-more',
   noResults: 'bz-list-no-results',
   inputLoading: 'bz-loading',
-  match: 'bz-text-match'
+  match: 'bz-text-match',
 };
 
 var templates = {
@@ -1538,7 +1538,7 @@ var templates = {
   label: '{{.}}',
   noResults: 'No results {{#search}}for "{{/search}}{{search}}{{#search}}"{{/search}}',
   loadMore: '...',
-  loading: 'Loading ...'
+  loading: 'Loading ...',
 };
 
 module.exports = {
@@ -1550,8 +1550,10 @@ module.exports = {
   limit: 10,
   scrollDistance: 0,
   hasMoreItems: function (result) { return !!result.length && result.length === this.limit; },
+
   getItems: function (result) { return result; },
-  closeOnBlur: true
+
+  closeOnBlur: true,
 };
 
 },{}],10:[function(require,module,exports){
@@ -1560,7 +1562,7 @@ module.exports = {
 module.exports = {
   addClass: addClass,
   removeClass: removeClass,
-  hasClass: hasClass
+  hasClass: hasClass,
 };
 
 function addClass(element, className) {
@@ -1638,7 +1640,10 @@ function bonanza(element, options, callback) {
   options = util.merge(defaults, options);
 
   var context = new EventEmitter();
-  var selectedItem, lastQuery, initialState, currentValue;
+  var selectedItem;
+  var lastQuery;
+  var initialState;
+  var currentValue;
 
   var container = document.createElement('div');
   container.className = options.css.container || '';
@@ -1655,7 +1660,11 @@ function bonanza(element, options, callback) {
     var bottom = e.target.scrollTop + e.target.clientHeight - e.target.scrollHeight;
 
     if (bottom >= (-1 * options.scrollDistance) && dataList.hasMoreItems() && initialState) {
-      context.emit('search', { offset: dataList.items.length, limit: options.limit, search: initialState.searchTerm });
+      context.emit('search', {
+        offset: dataList.items.length,
+        limit: options.limit,
+        search: initialState.searchTerm,
+      });
     }
   });
 
@@ -1681,13 +1690,13 @@ function bonanza(element, options, callback) {
   });
 
   element.addEventListener('keydown', function (e) {
-    var lastIndex, nodeIndex;
+    var lastIndex;
+    var nodeIndex;
     var key = keys[e.keyCode];
 
     if (selectedItem) {
       lastIndex = dataList.items.indexOf(selectedItem);
-    }
-    else {
+    } else {
       lastIndex = 0;
     }
 
@@ -1696,20 +1705,16 @@ function bonanza(element, options, callback) {
 
       if (nodeIndex === -1 && dataList.hasMoreItems()) {
         nodeIndex = 0;
-      }
-      else if (nodeIndex < 0) {
+      } else if (nodeIndex < 0) {
         nodeIndex = dataList.items.length - 1;
       }
 
       showList();
       context.emit('select', dataList.items[nodeIndex].data);
-    }
-
-    else if (key === 'down') {
+    } else if (key === 'down') {
       if (selectedItem) {
         nodeIndex = lastIndex + 1;
-      }
-      else {
+      } else {
         nodeIndex = 0;
       }
 
@@ -1717,25 +1722,26 @@ function bonanza(element, options, callback) {
         nodeIndex = 0;
       }
 
-      if (!dataList.items.length || (dataList.hasMoreItems() && nodeIndex >= dataList.items.length - 2)) {
+      if ((dataList.hasMoreItems() && nodeIndex >= dataList.items.length - 2) ||
+        !dataList.items.length) {
         showList();
-        context.emit('search', { offset: dataList.items.length, limit: options.limit, search: initialState ? initialState.searchTerm : element.value });
+        context.emit('search', {
+          offset: dataList.items.length,
+          limit: options.limit,
+          search: initialState ? initialState.searchTerm : element.value,
+        });
       }
 
       if (dataList.items[nodeIndex]) {
         context.emit('select', dataList.items[nodeIndex].data);
       }
-    }
-
-    else if (key === 'enter' && isVisible()) {
+    } else if (key === 'enter' && isVisible()) {
       selectedItem = selectedItem || dataList.items[0];
 
       if (selectedItem) {
         context.emit('change', selectedItem.data);
       }
-    }
-
-    else if (key === 'escape' && isVisible()) {
+    } else if (key === 'escape' && isVisible()) {
       context.emit('cancel');
     }
   });
@@ -1788,9 +1794,10 @@ function bonanza(element, options, callback) {
       var bottom = selectedItem.element.offsetTop + selectedItem.element.offsetHeight;
 
       if (bottom > container.clientHeight + container.scrollTop) {
-        container.scrollTop = selectedItem.element.offsetTop - container.clientHeight + selectedItem.element.offsetHeight;
-      }
-      else if (top < container.scrollTop) {
+        container.scrollTop = selectedItem.element.offsetTop -
+          container.clientHeight +
+          selectedItem.element.offsetHeight;
+      } else if (top < container.scrollTop) {
         container.scrollTop = selectedItem.element.offsetTop;
       }
     }
@@ -1853,8 +1860,7 @@ function bonanza(element, options, callback) {
 
       if (options.hasMoreItems(result)) {
         dataList.showLoadMore(result);
-      }
-      else if (!dataList.items.length) {
+      } else if (!dataList.items.length) {
         dataList.showNoResults(query);
       }
     }
@@ -1906,10 +1912,10 @@ function bonanza(element, options, callback) {
 'use strict';
 
 module.exports = {
-  '38': 'up',
-  '40': 'down',
-  '13': 'enter',
-  '27': 'escape'
+  38: 'up',
+  40: 'down',
+  13: 'enter',
+  27: 'escape',
 };
 
 },{}],13:[function(require,module,exports){
@@ -1920,13 +1926,18 @@ var render = require('./render.js');
 var util = require('./util.js');
 
 module.exports = {
-  create: createList
+  create: createList,
 };
 
 function createList(context, options) {
-  var loadMore, loading, list, noResults;
+  var loadMore;
+  var loading;
+  var list;
+  var noResults;
   var items = [];
-  context.container.innerHTML = '<ul' + (options.css.list ? ' class="' + options.css.list + '"' : '') + '></ul>';
+  context.container.innerHTML = '<ul' +
+    (options.css.list ? ' class="' + options.css.list + '"' : '') +
+    '></ul>';
   list = context.container.children[0];
 
   return {
@@ -1938,7 +1949,7 @@ function createList(context, options) {
     hideLoading: hideLoading,
     showLoadMore: showLoadMore,
     showNoResults: showNoResults,
-    hasMoreItems: hasMoreItems
+    hasMoreItems: hasMoreItems,
   };
 
   function pushItem(info, search) {
@@ -1960,8 +1971,12 @@ function createList(context, options) {
     items.push(item);
   }
 
-  function highlight (str) {
-    return '<span' + (options.css.match ? ' class="' + options.css.match + '"' : '') + '>' + str + '</span>';
+  function highlight(str) {
+    return '<span' +
+      (options.css.match ? ' class="' + options.css.match + '"' : '') +
+      '>' +
+      str +
+      '</span>';
   }
 
   function cleanItems() {
@@ -2057,19 +2072,17 @@ var htmlUnescapes = {
   '&gt;': '>',
   '&quot;': '"',
   '&#39;': '\'',
-  '&#x2F;': '/'
+  '&#x2F;': '/',
 };
 var reHtmlUnescapes = /&(?:amp|lt|gt|quot|#39|#x2F);/g;
 
 function render(template, model, encode) {
   if (typeof template === 'function') {
     return template(model, encode);
-  }
-  else if (typeof template === 'string') {
+  } else if (typeof template === 'string') {
     if (encode) {
       return mustache.render(template, model);
-    }
-    else {
+    } else {
       return mustache.render(template, model)
         .replace(reHtmlUnescapes, unescapeHtmlChar);
     }
@@ -2085,7 +2098,7 @@ function unescapeHtmlChar(chr) {
 
 module.exports = {
   merge: merge,
-  queryRegExp: queryRegExp
+  queryRegExp: queryRegExp,
 };
 
 function merge(obj1, obj2) {
@@ -2107,7 +2120,7 @@ function queryRegExp(query) {
   return new RegExp(escapeRegExp(query), 'ig');
 }
 
-function escapeRegExp (str) {
+function escapeRegExp(str) {
   return str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 }
 
