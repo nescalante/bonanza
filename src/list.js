@@ -9,9 +9,14 @@ module.exports = {
 };
 
 function createList(context, options) {
-  var loadMore, loading, list, noResults;
+  var loadMore;
+  var loading;
+  var list;
+  var noResults;
   var items = [];
-  context.container.innerHTML = '<ul' + (options.css.list ? ' class="' + options.css.list + '"' : '') + '></ul>';
+  context.container.innerHTML = '<ul' +
+    (options.css.list ? ' class="' + options.css.list + '"' : '') +
+    '></ul>';
   list = context.container.children[0];
 
   return {
@@ -46,7 +51,11 @@ function createList(context, options) {
   }
 
   function highlight(str) {
-    return '<span' + (options.css.match ? ' class="' + options.css.match + '"' : '') + '>' + str + '</span>';
+    return '<span' +
+      (options.css.match ? ' class="' + options.css.match + '"' : '') +
+      '>' +
+      str +
+      '</span>';
   }
 
   function cleanItems() {

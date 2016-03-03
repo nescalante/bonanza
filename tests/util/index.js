@@ -1,3 +1,5 @@
+'use strict';
+
 function createInput() {
   var input = document.createElement('input');
   input.type = 'text';
@@ -21,5 +23,5 @@ function noop() {}
 
 module.exports = {
   createInput: createInput,
-  keyUp: keyUp
+  keyUp: keyUp,
 };

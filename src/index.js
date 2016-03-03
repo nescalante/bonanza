@@ -46,7 +46,10 @@ function bonanza(element, options, callback) {
   options = util.merge(defaults, options);
 
   var context = new EventEmitter();
-  var selectedItem, lastQuery, initialState, currentValue;
+  var selectedItem;
+  var lastQuery;
+  var initialState;
+  var currentValue;
 
   var container = document.createElement('div');
   container.className = options.css.container || '';
@@ -63,7 +66,11 @@ function bonanza(element, options, callback) {
     var bottom = e.target.scrollTop + e.target.clientHeight - e.target.scrollHeight;
 
     if (bottom >= (-1 * options.scrollDistance) && dataList.hasMoreItems() && initialState) {
-      context.emit('search', { offset: dataList.items.length, limit: options.limit, search: initialState.searchTerm });
+      context.emit('search', {
+        offset: dataList.items.length,
+        limit: options.limit,
+        search: initialState.searchTerm,
+      });
     }
   });
 
@@ -89,7 +96,8 @@ function bonanza(element, options, callback) {
   });
 
   element.addEventListener('keydown', function (e) {
-    var lastIndex, nodeIndex;
+    var lastIndex;
+    var nodeIndex;
     var key = keys[e.keyCode];
 
     if (selectedItem) {
@@ -120,9 +128,14 @@ function bonanza(element, options, callback) {
         nodeIndex = 0;
       }
 
-      if (!dataList.items.length || (dataList.hasMoreItems() && nodeIndex >= dataList.items.length - 2)) {
+      if ((dataList.hasMoreItems() && nodeIndex >= dataList.items.length - 2) ||
+        !dataList.items.length) {
         showList();
-        context.emit('search', { offset: dataList.items.length, limit: options.limit, search: initialState ? initialState.searchTerm : element.value });
+        context.emit('search', {
+          offset: dataList.items.length,
+          limit: options.limit,
+          search: initialState ? initialState.searchTerm : element.value,
+        });
       }
 
       if (dataList.items[nodeIndex]) {
@@ -187,7 +200,9 @@ function bonanza(element, options, callback) {
       var bottom = selectedItem.element.offsetTop + selectedItem.element.offsetHeight;
 
       if (bottom > container.clientHeight + container.scrollTop) {
-        container.scrollTop = selectedItem.element.offsetTop - container.clientHeight + selectedItem.element.offsetHeight;
+        container.scrollTop = selectedItem.element.offsetTop -
+          container.clientHeight +
+          selectedItem.element.offsetHeight;
       } else if (top < container.scrollTop) {
         container.scrollTop = selectedItem.element.offsetTop;
       }
