@@ -1764,6 +1764,8 @@ function bonanza(element, options, callback) {
 
   context.on('close', function () {
     dataList.clean();
+    dataList.hideLoading();
+    dom.removeClass(element, options.css.inputLoading);
     dom.addClass(container, options.css.hide);
     selectedItem = null;
     lastQuery = null;
@@ -1830,15 +1832,14 @@ function bonanza(element, options, callback) {
 
     lastQuery = query;
     callback(query, function (err, result) {
-      dataList.hideLoading();
-      dom.removeClass(element, options.css.inputLoading);
-
       if (err) {
         context.emit('error', err);
         return;
       }
 
       if (lastQuery === query) {
+        dataList.hideLoading();
+        dom.removeClass(element, options.css.inputLoading);
         context.emit('success', result, query);
       }
     });
