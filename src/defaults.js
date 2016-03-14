@@ -27,6 +27,7 @@ module.exports = {
   openOnFocus: true,
   showLoading: true,
   showloadMore: true,
+  includeAnchors: false,
   limit: 10,
   scrollDistance: 0,
   hasMoreItems: function (result) { return !!result.length && result.length === this.limit; },

@@ -130,7 +130,9 @@ function createList(context, options) {
 
   function appendElement(template, className, obj) {
     var element = document.createElement('li');
-    element.innerHTML = render(template, obj, true);
+    element.innerHTML = (options.includeAnchors ? '<a>' : '') +
+      render(template, obj, true) +
+      (options.includeAnchors ? '</a>' : '');
     element.className = className || '';
     list.appendChild(element);
 
