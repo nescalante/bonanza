@@ -1964,6 +1964,10 @@ function createList(context, options) {
       itemElem.innerHTML = itemElem.innerHTML.replace(regExp, highlight);
     }
 
+    if (options.includeAnchors) {
+      itemElem.innerHTML = '<a>' + itemElem.innerHTML + '</a>';
+    }
+
     itemElem.addEventListener('mousedown', function (e) {
       context.emit('change', info, itemElem);
     });
@@ -2053,9 +2057,7 @@ function createList(context, options) {
 
   function appendElement(template, className, obj) {
     var element = document.createElement('li');
-    element.innerHTML = (options.includeAnchors ? '<a>' : '') +
-      render(template, obj, true) +
-      (options.includeAnchors ? '</a>' : '');
+    element.innerHTML = render(template, obj, true);
     element.className = className || '';
     list.appendChild(element);
 
