@@ -25,6 +25,7 @@ module.exports = {
   templates: templates,
   css: css,
   openOnFocus: true,
+  closeOnBlur: true,
   showLoading: true,
   showloadMore: true,
   includeAnchors: false,
@@ -33,6 +34,4 @@ module.exports = {
   hasMoreItems: function (result) { return !!result.length && result.length === this.limit; },
 
   getItems: function (result) { return result; },
-
-  closeOnBlur: true,
 };

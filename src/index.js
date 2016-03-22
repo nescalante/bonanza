@@ -66,11 +66,7 @@ function bonanza(element, options, callback) {
     var bottom = e.target.scrollTop + e.target.clientHeight - e.target.scrollHeight;
 
     if (bottom >= (-1 * options.scrollDistance) && dataList.hasMoreItems() && initialState) {
-      context.emit('search', {
-        offset: dataList.items.length,
-        limit: options.limit,
-        search: initialState.searchTerm,
-      });
+      context.emit('scrollbottom');
     }
   });
 
@@ -150,6 +146,14 @@ function bonanza(element, options, callback) {
     } else if (key === 'escape' && isVisible()) {
       context.emit('cancel');
     }
+  });
+
+  context.on('scrollbottom', function () {
+    context.emit('search', {
+      offset: dataList.items.length,
+      limit: options.limit,
+      search: initialState.searchTerm,
+    });
   });
 
   context.on('focus', function () {

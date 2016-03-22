@@ -96,7 +96,7 @@ function createList(context, options) {
     hideLoading();
 
     if (!loadMore) {
-      loadMore = appendElement(options.templates.loadMore, options.css.loadMore, result);
+      loadMore = appendAnchor(options.templates.loadMore, options.css.loadMore, result);
     }
 
     if (!options.showLoadMore) {
@@ -136,6 +136,21 @@ function createList(context, options) {
     var element = document.createElement('li');
     element.innerHTML = render(template, obj, true);
     element.className = className || '';
+    list.appendChild(element);
+
+    return element;
+  }
+
+  function appendAnchor(template, className, obj) {
+    var element = document.createElement('li');
+    var anchor = document.createElement('a');
+    anchor.innerHTML = render(template, obj, true);
+    anchor.addEventListener('mousedown', function () {
+      context.emit('scrollbottom');
+    });
+
+    element.className = className || '';
+    element.appendChild(anchor);
     list.appendChild(element);
 
     return element;
