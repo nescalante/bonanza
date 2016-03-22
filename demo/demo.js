@@ -1545,6 +1545,7 @@ module.exports = {
   templates: templates,
   css: css,
   openOnFocus: true,
+  closeOnBlur: true,
   showLoading: true,
   showloadMore: true,
   includeAnchors: false,
@@ -1553,8 +1554,6 @@ module.exports = {
   hasMoreItems: function (result) { return !!result.length && result.length === this.limit; },
 
   getItems: function (result) { return result; },
-
-  closeOnBlur: true,
 };
 
 },{}],10:[function(require,module,exports){
@@ -1661,11 +1660,7 @@ function bonanza(element, options, callback) {
     var bottom = e.target.scrollTop + e.target.clientHeight - e.target.scrollHeight;
 
     if (bottom >= (-1 * options.scrollDistance) && dataList.hasMoreItems() && initialState) {
-      context.emit('search', {
-        offset: dataList.items.length,
-        limit: options.limit,
-        search: initialState.searchTerm,
-      });
+      context.emit('scrollbottom');
     }
   });
 
@@ -1745,6 +1740,14 @@ function bonanza(element, options, callback) {
     } else if (key === 'escape' && isVisible()) {
       context.emit('cancel');
     }
+  });
+
+  context.on('scrollbottom', function () {
+    context.emit('search', {
+      offset: dataList.items.length,
+      limit: options.limit,
+      search: initialState.searchTerm,
+    });
   });
 
   context.on('focus', function () {
@@ -2019,7 +2022,7 @@ function createList(context, options) {
     hideLoading();
 
     if (!loadMore) {
-      loadMore = appendElement(options.templates.loadMore, options.css.loadMore, result);
+      loadMore = appendAnchor(options.templates.loadMore, options.css.loadMore, result);
     }
 
     if (!options.showLoadMore) {
@@ -2059,6 +2062,21 @@ function createList(context, options) {
     var element = document.createElement('li');
     element.innerHTML = render(template, obj, true);
     element.className = className || '';
+    list.appendChild(element);
+
+    return element;
+  }
+
+  function appendAnchor(template, className, obj) {
+    var element = document.createElement('li');
+    var anchor = document.createElement('a');
+    anchor.innerHTML = render(template, obj, true);
+    anchor.addEventListener('mousedown', function () {
+      context.emit('scrollbottom');
+    });
+
+    element.className = className || '';
+    element.appendChild(anchor);
     list.appendChild(element);
 
     return element;
