@@ -1667,7 +1667,7 @@ function bonanza(element, options, callback) {
   container.onmousewheel = handleMouseWheel;
 
   element.addEventListener('focus', function () {
-    context.emit('focus');
+    context.emit('open');
   });
 
   element.addEventListener('blur', function (e) {
@@ -1680,7 +1680,6 @@ function bonanza(element, options, callback) {
     currentValue = null;
 
     if (!(e.keyCode.toString() in keys)) {
-      showList();
       context.emit('search', { offset: 0, limit: options.limit, search: element.value });
     }
   });
@@ -1705,8 +1704,9 @@ function bonanza(element, options, callback) {
         nodeIndex = dataList.items.length - 1;
       }
 
-      showList();
-      context.emit('select', dataList.items[nodeIndex].data);
+      if (dataList.items.length) {
+        context.emit('select', dataList.items[nodeIndex].data);
+      }
     } else if (key === 'down') {
       if (selectedItem) {
         nodeIndex = lastIndex + 1;
@@ -1720,7 +1720,6 @@ function bonanza(element, options, callback) {
 
       if ((dataList.hasMoreItems() && nodeIndex >= dataList.items.length - 2) ||
         !dataList.items.length) {
-        showList();
         context.emit('search', {
           offset: dataList.items.length,
           limit: options.limit,
@@ -1751,6 +1750,10 @@ function bonanza(element, options, callback) {
   });
 
   context.on('focus', function () {
+    context.emit('open');
+  });
+
+  context.on('open', function () {
     if (options.openOnFocus) {
       setTimeout(element.setSelectionRange.bind(element, 0, element.value.length), 0);
 
@@ -1760,7 +1763,7 @@ function bonanza(element, options, callback) {
     }
   });
 
-  context.on('open', function () {
+  context.on('show', function () {
     dom.removeClass(container, options.css.hide);
     container.style.top = (element.offsetTop + element.offsetHeight) + 'px';
     container.style.left = (element.offsetLeft) + 'px';
@@ -1879,7 +1882,7 @@ function bonanza(element, options, callback) {
 
   function showList() {
     if (!isVisible()) {
-      context.emit('open');
+      context.emit('show');
     }
   }
 
