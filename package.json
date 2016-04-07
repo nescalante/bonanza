@@ -1,6 +1,6 @@
 {
   "name": "bonanza",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Customizable autocomplete for really large collections",
   "main": "bonanza.js",
   "scripts": {
