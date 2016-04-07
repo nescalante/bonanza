@@ -46,7 +46,7 @@ function createList(context, options) {
     }
 
     itemElem.addEventListener('mousedown', function (e) {
-      context.emit('change', info, itemElem);
+      context.emit('change', info);
     });
 
     hideLoading();
