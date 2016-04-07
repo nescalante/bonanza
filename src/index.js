@@ -146,6 +146,8 @@ function bonanza(element, options, callback) {
       }
     } else if (key === 'escape' && isVisible()) {
       context.emit('cancel');
+    } else {
+      currentValue = null;
     }
   });
 
@@ -223,6 +225,7 @@ function bonanza(element, options, callback) {
   context.on('cancel', function () {
     if (initialState) {
       element.value = initialState.searchTerm;
+      currentValue = initialState.oldValue;
       initialState = null;
     }
 
@@ -235,7 +238,7 @@ function bonanza(element, options, callback) {
     }
 
     if (query.offset === 0) {
-      initialState = { oldValue: element.value, searchTerm: query.search };
+      initialState = { oldValue: currentValue, searchTerm: query.search };
     }
 
     if (options.showLoading) {
