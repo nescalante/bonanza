@@ -21,13 +21,13 @@ test('show list on focus', function (t) {
   t.end();
 });
 
-test('show list on open', function (t) {
+test('show list on show', function (t) {
   var input = util.createInput();
   var b = createBasicList(input);
 
   t.equal(b.container.className, 'bz-container bz-hide');
 
-  b.emit('open');
+  b.emit('show');
 
   t.equal(b.container.className, 'bz-container');
 
