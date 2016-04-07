@@ -1680,10 +1680,12 @@ function bonanza(element, options, callback) {
   });
 
   element.addEventListener('keyup', function (e) {
-    currentValue = null;
+    var key = keys[e.keyCode];
 
-    if (!(e.keyCode.toString() in keys)) {
+    if (!key) {
       context.emit('search', { offset: 0, limit: options.limit, search: element.value });
+    } else if (key !== 'enter') {
+      currentValue = null;
     }
   });
 
@@ -1978,7 +1980,7 @@ function createList(context, options) {
     }
 
     itemElem.addEventListener('mousedown', function (e) {
-      context.emit('change', info, itemElem);
+      context.emit('change', info);
     });
 
     hideLoading();
