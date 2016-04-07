@@ -1,6 +1,7 @@
 'use strict';
 
 var bonanza = require('../src');
+var util = require('../src/util.js');
 var list = require('./list.json');
 
 module.exports = function () {
@@ -15,7 +16,7 @@ function request(query, done) {
         return item.firstName + ' ' + item.lastName;
       })
       .filter(function (item) {
-        return new RegExp(query.search, 'i').test(item);
+        return util.queryRegExp(query.search).test(item);
       })
       .slice(query.offset, query.offset + query.limit);
 
