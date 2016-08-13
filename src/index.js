@@ -9,7 +9,6 @@ var render = require('./render.js');
 var util = require('./util.js');
 
 bonanza.defaults = defaults;
-bonanza.render = render;
 global.bonanza = bonanza;
 module.exports = bonanza;
 

@@ -14,9 +14,14 @@ var css = {
 };
 
 var templates = {
-  item: '{{.}}',
-  label: '{{.}}',
-  noResults: 'No results {{#search}}for "{{/search}}{{search}}{{#search}}"{{/search}}',
+  item: function (item) { return item; },
+
+  label: function (label) { return label; },
+
+  noResults: function (obj) {
+    return 'No results' + (obj && obj.search ? ' for "' + obj.search + '"' : '');
+  },
+
   loadMore: '...',
   loading: 'Loading ...',
 };

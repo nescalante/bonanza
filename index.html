@@ -42,7 +42,7 @@ bonanza(document.querySelector('input'), function (query, done) {
     <p>Since <span class="bonanza">bonanza</span> works with pagination, you can scroll your results down the list and get them on demand!
   </div>
   <div class="example">
-    <p>You can use <a href="https://mustache.github.io/">mustache</a> templates when working with objects instead of just strings</p>
+    <p>You can use function templates when working with objects instead of just strings</p>
     <input id="example3" type="text" placeholder="Type a character" />
     <p>Sample data:</p>
     <pre>
@@ -62,7 +62,7 @@ bonanza(document.querySelector('input'), function (query, done) {
     <p>Source:</p>
     <pre>
 <code>
-var options = { templates: { item: '{{firstName}} {{lastName}}' } };
+var options = { templates: { item: (obj) => `${obj.firstName} ${obj.lastName}` } };
 
 bonanza(document.querySelector('input'), options, function (query, done) {
   request

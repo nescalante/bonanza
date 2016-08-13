@@ -56,15 +56,15 @@ The `options` are detailed below:
 
 #### `options.templates`
 
-An object with a set of [mustache](https://mustache.github.io/) templates or functions. Here you have a detailed table with all that you need to replace:
+An object with a set of functions. Here you have a detailed table with all that you need to replace:
 
-Property  | Default                       | Usage
---------- | ----------------------------- | ---------------------------------------
-item      | `{{.}}`                       | List items
-label     | `{{{.}}}`                     | Input value when user selects some item
-noResults | `No results for "{{search}}"` | Showed when query returns no results
-loadMore  | `...`                         | Showed at bottom when there is more data to show
-loading   | `Loading ...`                 | Showed at bottom when loading more data
+Property  | Default                                     | Usage
+--------- | ------------------------------------------- | ---------------------------------------
+item      | `(obj) => obj`                              | List items
+label     | `(obj) => obj                               | Input value when user selects some item
+noResults | `(search) => \`No results for "${search}"\` | Showed when query returns no results
+loadMore  | `...`                                       | Showed at bottom when there is more data to show
+loading   | `Loading ...`                               | Showed at bottom when loading more data
 
 #### `options.css`
 
