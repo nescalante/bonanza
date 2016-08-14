@@ -4,7 +4,7 @@
   "description": "Customizable autocomplete for really large collections",
   "main": "bonanza.js",
   "scripts": {
-    "test": "jshint src/*.js tests/**/*.js && jscs src/*.js tests/**/*.js && browserify tests/*.js | tape-run",
+    "test": "jshint src/*.js tests/**/*.js && jscs src/*.js tests/**/*.js && browserify tests/*.js | tape-run | tap-spec",
     "build": "npm run test && browserify bonanza.js -d -o dist/bonanza.js && uglify -s dist/bonanza.js -o dist/bonanza.min.js && cleancss dist/bonanza.css -o dist/bonanza.min.css && browserify demo/index.js -o demo/demo.js",
     "start": "static & watchify demo/index.js -o demo/demo.js",
     "preversion": "npm run build && git commit --allow-empty -am 'pre-release commit'",
@@ -31,6 +31,7 @@
     "jscs": "^2.11.0",
     "jshint": "^2.9.1",
     "node-static": "^0.7.7",
+    "tap-spec": "^4.1.1",
     "tape": "^4.5.0",
     "tape-run": "^2.1.3",
     "uglify": "^0.1.5",
