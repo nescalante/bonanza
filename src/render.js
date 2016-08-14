@@ -1,5 +1,7 @@
 'use strict';
 
+var util = require('./util.js');
+
 module.exports = render;
 
 function render(template, model, encode) {
@@ -12,12 +14,7 @@ function render(template, model, encode) {
   }
 
   if (encode) {
-    result = result
-     .replace(/&/g, '&amp;')
-     .replace(/</g, '&lt;')
-     .replace(/>/g, '&gt;')
-     .replace(/"/g, '&quot;')
-     .replace(/'/g, '&#039;');
+    result = util.encode(result);
   }
 
   return result;

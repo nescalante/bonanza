@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+  encode: encode,
   merge: merge,
   queryRegExp: queryRegExp,
 };
@@ -21,9 +22,18 @@ function merge(obj1, obj2) {
 }
 
 function queryRegExp(query) {
-  return new RegExp(escapeRegExp(query), 'ig');
+  return new RegExp('(.*?)(' + escapeRegExp(query) + ')', 'ig');
 }
 
 function escapeRegExp(str) {
   return str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+}
+
+function encode(str) {
+  return str
+   .replace(/&/g, '&amp;')
+   .replace(/</g, '&lt;')
+   .replace(/>/g, '&gt;')
+   .replace(/"/g, '&quot;')
+   .replace(/'/g, '&#039;');
 }

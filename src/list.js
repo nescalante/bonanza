@@ -33,12 +33,31 @@ function createList(context, options) {
 
   function pushItem(info, search) {
     var regExp;
+    var label;
+    var innerHTML;
+    var lastIndex;
+    var matches;
     var itemElem = appendElement(options.templates.item, options.css.item, info);
     var item = { data: info, element: itemElem };
 
     if (search) {
+      label = options.templates.item(info);
       regExp = util.queryRegExp(search);
-      itemElem.innerHTML = itemElem.innerHTML.replace(regExp, highlight);
+      innerHTML = '';
+
+      while (matches = regExp.exec(label)) {
+        innerHTML += util.encode(matches[1]);
+        innerHTML += highlight(matches[2]);
+        lastIndex = regExp.lastIndex;
+      }
+
+      if (innerHTML) {
+        innerHTML += util.encode(label.substr(lastIndex));
+      } else {
+        innerHTML += util.encode(label);
+      }
+
+      itemElem.innerHTML = innerHTML;
     }
 
     if (options.includeAnchors) {
