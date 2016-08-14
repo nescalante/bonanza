@@ -1343,12 +1343,31 @@ function createList(context, options) {
 
   function pushItem(info, search) {
     var regExp;
+    var label;
+    var innerHTML;
+    var lastIndex;
+    var matches;
     var itemElem = appendElement(options.templates.item, options.css.item, info);
     var item = { data: info, element: itemElem };
 
     if (search) {
+      label = options.templates.item(info);
       regExp = util.queryRegExp(search);
-      itemElem.innerHTML = itemElem.innerHTML.replace(regExp, highlight);
+      innerHTML = '';
+
+      while (matches = regExp.exec(label)) {
+        innerHTML += util.encode(matches[1]);
+        innerHTML += highlight(matches[2]);
+        lastIndex = regExp.lastIndex;
+      }
+
+      if (innerHTML) {
+        innerHTML += util.encode(label.substr(lastIndex));
+      } else {
+        innerHTML += util.encode(label);
+      }
+
+      itemElem.innerHTML = innerHTML;
     }
 
     if (options.includeAnchors) {
@@ -1470,6 +1489,8 @@ function createList(context, options) {
 },{"./dom.js":9,"./render.js":13,"./util.js":14}],13:[function(require,module,exports){
 'use strict';
 
+var util = require('./util.js');
+
 module.exports = render;
 
 function render(template, model, encode) {
@@ -1482,21 +1503,17 @@ function render(template, model, encode) {
   }
 
   if (encode) {
-    result = result
-     .replace(/&/g, '&amp;')
-     .replace(/</g, '&lt;')
-     .replace(/>/g, '&gt;')
-     .replace(/"/g, '&quot;')
-     .replace(/'/g, '&#039;');
+    result = util.encode(result);
   }
 
   return result;
 }
 
-},{}],14:[function(require,module,exports){
+},{"./util.js":14}],14:[function(require,module,exports){
 'use strict';
 
 module.exports = {
+  encode: encode,
   merge: merge,
   queryRegExp: queryRegExp,
 };
@@ -1517,11 +1534,20 @@ function merge(obj1, obj2) {
 }
 
 function queryRegExp(query) {
-  return new RegExp(escapeRegExp(query), 'ig');
+  return new RegExp('(.*?)(' + escapeRegExp(query) + ')', 'ig');
 }
 
 function escapeRegExp(str) {
   return str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+}
+
+function encode(str) {
+  return str
+   .replace(/&/g, '&amp;')
+   .replace(/</g, '&lt;')
+   .replace(/>/g, '&gt;')
+   .replace(/"/g, '&quot;')
+   .replace(/'/g, '&#039;');
 }
 
 },{}]},{},[5]);
