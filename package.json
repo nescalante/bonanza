@@ -28,7 +28,7 @@
   "devDependencies": {
     "browserify": "^13.0.0",
     "clean-css": "^3.3.8",
-    "jscs": "^2.11.0",
+    "jscs": "^3.0.7",
     "jshint": "^2.9.1",
     "node-static": "^0.7.7",
     "tap-spec": "^4.1.1",
