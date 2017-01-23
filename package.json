@@ -27,7 +27,7 @@
   "homepage": "https://github.com/nescalante/bonanza",
   "devDependencies": {
     "browserify": "^13.0.0",
-    "clean-css": "^3.3.8",
+    "clean-css": "^4.0.0",
     "jscs": "^3.0.7",
     "jshint": "^2.9.1",
     "node-static": "^0.7.7",
