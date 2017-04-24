@@ -1,7 +1,8 @@
 [
   {
     "firstName": "Abraham",
-    "lastName": "Simpson"
+    "lastName": "Simpson",
+    "isDisabled": true
   },
   {
     "firstName": "Agnes",
@@ -17,7 +18,8 @@
   },
   {
     "firstName": "Amber",
-    "lastName": "Simpson"
+    "lastName": "Simpson",
+    "isDisabled": true
   },
   {
     "firstName": "Apu",
@@ -49,7 +51,8 @@
   },
   {
     "firstName": "Bart",
-    "lastName": "Simpson"
+    "lastName": "Simpson",
+    "isDisabled": true
   },
   {
     "firstName": "Bernice",
@@ -189,7 +192,8 @@
   },
   {
     "firstName": "Homer",
-    "lastName": "Simpson"
+    "lastName": "Simpson",
+    "isDisabled": true
   },
   {
     "firstName": "Horatio",
@@ -269,7 +273,8 @@
   },
   {
     "firstName": "Lisa",
-    "lastName": "Simpson"
+    "lastName": "Simpson",
+    "isDisabled": true
   },
   {
     "firstName": "Lois",
@@ -289,7 +294,8 @@
   },
   {
     "firstName": "Maggie",
-    "lastName": "Simpson"
+    "lastName": "Simpson",
+    "isDisabled": true
   },
   {
     "firstName": "Manjula",
@@ -297,7 +303,8 @@
   },
   {
     "firstName": "Marge",
-    "lastName": "Simpson"
+    "lastName": "Simpson",
+    "isDisabled": true
   },
   {
     "firstName": "Martin",
@@ -329,7 +336,8 @@
   },
   {
     "firstName": "Mona",
-    "lastName": "Simpson"
+    "lastName": "Simpson",
+    "isDisabled": true
   },
   {
     "firstName": "Mr",

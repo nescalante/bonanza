@@ -94,6 +94,7 @@ function bonanza(element, options, callback) {
   element.addEventListener('keydown', function (e) {
     var lastIndex;
     var nodeIndex;
+    var isDisabled;
     var key = keys[e.keyCode];
 
     if (selectedItem) {
@@ -141,7 +142,11 @@ function bonanza(element, options, callback) {
       selectedItem = selectedItem || dataList.items[0];
 
       if (selectedItem) {
-        context.emit('change', selectedItem.data);
+        isDisabled = options.templates.isDisabled(selectedItem.data);
+
+        if (!isDisabled) {
+          context.emit('change', selectedItem.data);
+        }
       }
     } else if (key === 'escape' && isVisible()) {
       context.emit('cancel');

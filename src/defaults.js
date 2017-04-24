@@ -5,6 +5,7 @@ var css = {
   hide: 'bz-hide',
   list: 'bz-list',
   item: 'bz-list-item',
+  disabled: 'bz-list-item-disabled',
   selected: 'bz-list-item-selected',
   loading: 'bz-list-loading',
   loadMore: 'bz-list-load-more',
@@ -17,6 +18,8 @@ var templates = {
   item: function (item) { return item; },
 
   label: function (label) { return label; },
+
+  isDisabled: function (item) { return false; },
 
   noResults: function (obj) {
     return 'No results' + (obj && obj.search ? ' for "' + obj.search + '"' : '');

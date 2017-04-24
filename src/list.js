@@ -37,7 +37,9 @@ function createList(context, options) {
     var innerHTML;
     var lastIndex;
     var matches;
-    var itemElem = appendElement(options.templates.item, options.css.item, info);
+    var isDisabled = options.templates.isDisabled(info);
+    var itemClass = options.css.item + (isDisabled ? ' ' + options.css.disabled : '');
+    var itemElem = appendElement(options.templates.item, itemClass, info);
     var item = { data: info, element: itemElem };
 
     if (search) {
@@ -65,7 +67,9 @@ function createList(context, options) {
     }
 
     itemElem.addEventListener('mousedown', function (e) {
-      context.emit('change', info);
+      if (!isDisabled) {
+        context.emit('change', info);
+      }
     });
 
     hideLoading();

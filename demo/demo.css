@@ -82,6 +82,17 @@ input[type="text"] {
   color: #fff;
 }
 
+.bz-list-item-disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.bz-list-item.bz-list-item-disabled:hover {
+  background-color: #fff;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
 .bz-list-item.bz-list-item-selected {
   background-color: #def;
 }

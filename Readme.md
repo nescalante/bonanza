@@ -58,13 +58,14 @@ The `options` are detailed below:
 
 An object with a set of functions. Here you have a detailed table with all that you need to replace:
 
-Property  | Default                                     | Usage
---------- | ------------------------------------------- | ---------------------------------------
-item      | `(obj) => obj`                              | List items
-label     | `(obj) => obj                               | Input value when user selects some item
-noResults | `(search) => \`No results for "${search}"\` | Showed when query returns no results
-loadMore  | `...`                                       | Showed at bottom when there is more data to show
-loading   | `Loading ...`                               | Showed at bottom when loading more data
+Property   | Default                                      | Usage
+---------- | -------------------------------------------- | ---------------------------------------
+item       | `(obj) => obj`                               | List items
+label      | `(obj) => obj`                               | Input value when user selects some item
+isDisabled | `(obj) => false`                             | Marks an item as disabled
+noResults  | `(search) => \`No results for "${search}"\`` | Showed when query returns no results
+loadMore   | `...`                                        | Showed at bottom when there is more data to show
+loading    | `Loading ...`                                | Showed at bottom when loading more data
 
 #### `options.css`
 
@@ -76,6 +77,7 @@ container     | `bz-container`          | The `div` class for the main container
 hide          | `bz-hide`               | Class to hide the container
 list          | `bz-list`               | The class for the `ul` inside the container
 item          | `bz-list-item`          | Every `li` element for the results
+disabled      | `bz-list-item-disabled` | A disabled element in the list
 selected      | `bz-list-item-selected` | When an item is being selected
 loading       | `bz-list-loading`       | The "loading" `li` item
 loadMore      | `bz-list-load-more`     | The "load more" `li` item
