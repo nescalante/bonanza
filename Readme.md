@@ -1,4 +1,4 @@
-# Bonanza [![Build Status](https://travis-ci.org/nescalante/bonanza.svg?branch=master)](https://travis-ci.org/nescalante/bonanza)
+# Bonanza [![Build Status](https://travis-ci.org/nescalante/bonanza.svg?branch=master)](https://travis-ci.org/nescalante/bonanza) [![Greenkeeper badge](https://badges.greenkeeper.io/nescalante/bonanza.svg)](https://greenkeeper.io/)
 
 > Customizable autocomplete for really large collections
 
