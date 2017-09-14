@@ -79,8 +79,31 @@ bonanza(document.querySelector('input'), options, function (query, done) {
     <p>Of course you can use your arrow keys to happily navigate through the results!</p>
   </div>
   <div class="example">
-    <p>Listen to the events to know what happens inside <span class="bonanza">bonanza</span></p>
+    <p>Want to do efficient search? Try to run queries only when you think is needed</p>
     <input id="example4" type="text" placeholder="Type a character" />
+    <p>Source:</p>
+    <pre>
+<code>
+bonanza(document.querySelector('input'), options, function (query, done) {
+  if (query.search.length > 3) {
+    request
+      .get('/search?term=' + query.search + '&offset=' + query.offset + '&limit=' + query.limit)
+      .on('response', function (res) {
+        done(null, res.body);
+      })
+      .on('error', function (err) {
+        done(err);
+      });
+  } else {
+    done();
+  }
+});
+</code>
+    </pre>
+  </div>
+  <div class="example">
+    <p>Listen to the events to know what happens inside <span class="bonanza">bonanza</span></p>
+    <input id="example5" type="text" placeholder="Type a character" />
     <p>Source:</p>
     <pre>
 <code>
@@ -93,7 +116,8 @@ bonanza(document.querySelector('input'), options, function (query, done) {
     .on('error', function (err) {
       done(err);
     });
-}).on('change', function (item) {
+})
+.on('change', function (item) {
   alert(JSON.stringify(item));
 });
 </code>
@@ -101,7 +125,7 @@ bonanza(document.querySelector('input'), options, function (query, done) {
   </div>
   <div class="example">
     <p>Even more! you can set items as disabled if needed</p>
-    <input id="example5" type="text" placeholder="Type a character" />
+    <input id="example6" type="text" placeholder="Type a character" />
     <p>Source:</p>
     <pre>
 <code>
@@ -121,8 +145,6 @@ bonanza(document.querySelector('input'), options, function (query, done) {
     .on('error', function (err) {
       done(err);
     });
-}).on('change', function (item) {
-  alert(JSON.stringify(item));
 });
 </code>
     </pre>

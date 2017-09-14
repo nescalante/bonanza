@@ -286,6 +286,8 @@ function bonanza(element, options, callback) {
       } else if (!dataList.items.length) {
         dataList.showNoResults(query);
       }
+    } else {
+      context.emit('close');
     }
   });
 
