@@ -35,7 +35,7 @@ You just need an input to work on and a function (a.k.a. callback) that returns 
 - `options` (optional):
   a set of parameters to customize `bonanza` as needed
 - `callback | list` (required):
-  `bonanza` doesn't know how to get your data, so it needs a function that receives a query, and returns the rows that will be used to fill the autocomplete info, or even an array with all the results that you need to display.
+  `bonanza` doesn't know how to get your data, so it needs a function that receives a query, and returns the rows as an `Array` that will be used to fill the autocomplete info, or even an array with all the results that you need to display.
 
 The example below shows you how to easily set up `bonanza` for an `input` element:
 
