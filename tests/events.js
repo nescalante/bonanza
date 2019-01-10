@@ -78,6 +78,28 @@ test('highlight item on select', function (t) {
   t.end();
 });
 
+test('escape special characters when highlighting after select', function (t) {
+  var input = util.createInput();
+  var b = bonanza(input, ['fo<>o', 'ba<svg onload=alert(1)>r']);
+  var list;
+
+  var items = [
+    'fo<>o',
+    'ba<svg onload=alert(1)>r'
+  ];
+  var query = {
+    search: 'ba<svg onload=alert(1)>'
+  };
+  b.emit('success', items, query);
+
+  list = b.container.children[0];
+
+  t.equal(list.children[0].innerHTML, 'fo&lt;&gt;o');
+  t.equal(list.children[1].innerHTML, '<span class="bz-text-match">ba&lt;svg onload=alert(1)&gt;</span>r');
+
+  t.end();
+});
+
 function createBasicList(input) {
   return bonanza(input, ['foo', 'bar', 'baz']);
 }
