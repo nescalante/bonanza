@@ -7,7 +7,7 @@ module.exports = function () {
   bonanza(document.querySelector('#example1'), ['Bart', 'Lisa', 'Maggie']);
 };
 
-},{"../src":11}],2:[function(require,module,exports){
+},{"../src":12}],2:[function(require,module,exports){
 'use strict';
 
 var bonanza = require('../src');
@@ -35,7 +35,7 @@ function request(query, done) {
   }, 300);
 }
 
-},{"../src":11,"../src/util.js":15,"./list.json":7}],3:[function(require,module,exports){
+},{"../src":12,"../src/util.js":16,"./list.json":8}],3:[function(require,module,exports){
 'use strict';
 
 var bonanza = require('../src');
@@ -60,7 +60,7 @@ function request(query, done) {
   }, 300);
 }
 
-},{"../src":11,"../src/util.js":15,"./list.json":7}],4:[function(require,module,exports){
+},{"../src":12,"../src/util.js":16,"./list.json":8}],4:[function(require,module,exports){
 'use strict';
 
 var bonanza = require('../src');
@@ -89,7 +89,7 @@ function request(query, done) {
   }
 }
 
-},{"../src":11,"../src/util.js":15,"./list.json":7}],5:[function(require,module,exports){
+},{"../src":12,"../src/util.js":16,"./list.json":8}],5:[function(require,module,exports){
 'use strict';
 
 var bonanza = require('../src');
@@ -118,7 +118,32 @@ function request(query, done) {
   }, 300);
 }
 
-},{"../src":11,"../src/util.js":15,"./list.json":7}],6:[function(require,module,exports){
+},{"../src":12,"../src/util.js":16,"./list.json":8}],6:[function(require,module,exports){
+'use strict';
+
+var bonanza = require('../src');
+var util = require('../src/util.js');
+var list = require('./list.json');
+
+module.exports = function () {
+  bonanza(document.querySelector('#example6'), { templates: { item: function (obj) { return obj.firstName + ' ' + obj.lastName; }, isDisabled: function (obj) { return obj.isDisabled; } } }, request);
+};
+
+function request(query, done) {
+  console.info('Loading using query: ', query);
+  setTimeout(function () {
+    var items = list
+      .filter(function (item) {
+        return util.queryRegExp(query.search).test(item.firstName + ' ' + item.lastName);
+      })
+      .slice(query.offset, query.offset + query.limit);
+
+    done(null,
+     items);
+  }, 300);
+}
+
+},{"../src":12,"../src/util.js":16,"./list.json":8}],7:[function(require,module,exports){
 'use strict';
 
 require('./example1.js')();
@@ -126,8 +151,9 @@ require('./example2.js')();
 require('./example3.js')();
 require('./example4.js')();
 require('./example5.js')();
+require('./example6.js')();
 
-},{"./example1.js":1,"./example2.js":2,"./example3.js":3,"./example4.js":4,"./example5.js":5}],7:[function(require,module,exports){
+},{"./example1.js":1,"./example2.js":2,"./example3.js":3,"./example4.js":4,"./example5.js":5,"./example6.js":6}],8:[function(require,module,exports){
 module.exports=[
   {
     "firstName": "Abraham",
@@ -627,7 +653,7 @@ module.exports=[
   }
 ]
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -931,7 +957,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 var css = {
@@ -978,7 +1004,7 @@ module.exports = {
   getItems: function (result) { return result; },
 };
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -1012,7 +1038,7 @@ function hasClass(element, className) {
   return classes.indexOf(className) !== -1;
 }
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -1083,19 +1109,19 @@ function bonanza(element, options, callback) {
     if (bottom >= (-1 * options.scrollDistance) && dataList.hasMoreItems() && initialState) {
       context.emit('scrollbottom');
     }
-  });
+  }, { passive: true });
 
   container.onmousewheel = handleMouseWheel;
 
   element.addEventListener('focus', function () {
     context.emit('open');
-  });
+  }, { passive: true });
 
   element.addEventListener('blur', function (e) {
     if (options.closeOnBlur) {
       context.emit('close');
     }
-  });
+  }, { passive: true });
 
   element.addEventListener('keyup', function (e) {
     var key = keys[e.keyCode];
@@ -1105,7 +1131,7 @@ function bonanza(element, options, callback) {
     } else if (key !== 'enter') {
       currentValue = null;
     }
-  });
+  }, { passive: true });
 
   element.addEventListener('keydown', function (e) {
     var lastIndex;
@@ -1169,7 +1195,7 @@ function bonanza(element, options, callback) {
     } else {
       currentValue = null;
     }
-  });
+  }, { passive: true });
 
   context.on('scrollbottom', function () {
     context.emit('search', {
@@ -1349,7 +1375,7 @@ function bonanza(element, options, callback) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./defaults.js":9,"./dom.js":10,"./keys.js":12,"./list.js":13,"./render.js":14,"./util.js":15,"events":8}],12:[function(require,module,exports){
+},{"./defaults.js":10,"./dom.js":11,"./keys.js":13,"./list.js":14,"./render.js":15,"./util.js":16,"events":9}],13:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -1359,7 +1385,7 @@ module.exports = {
   27: 'escape',
 };
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 var dom = require('./dom.js');
@@ -1432,7 +1458,7 @@ function createList(context, options) {
       if (!isDisabled) {
         context.emit('change', info);
       }
-    });
+    }, { passive: true });
 
     hideLoading();
     list.appendChild(itemElem);
@@ -1532,7 +1558,7 @@ function createList(context, options) {
     anchor.innerHTML = render(template, obj, true);
     anchor.addEventListener('mousedown', function () {
       context.emit('scrollbottom');
-    });
+    }, { passive: true });
 
     element.className = className || '';
     element.appendChild(anchor);
@@ -1542,7 +1568,7 @@ function createList(context, options) {
   }
 }
 
-},{"./dom.js":10,"./render.js":14,"./util.js":15}],14:[function(require,module,exports){
+},{"./dom.js":11,"./render.js":15,"./util.js":16}],15:[function(require,module,exports){
 'use strict';
 
 var util = require('./util.js');
@@ -1565,7 +1591,7 @@ function render(template, model, encode) {
   return result;
 }
 
-},{"./util.js":15}],15:[function(require,module,exports){
+},{"./util.js":16}],16:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -1606,4 +1632,4 @@ function encode(str) {
    .replace(/'/g, '&#039;');
 }
 
-},{}]},{},[6]);
+},{}]},{},[7]);
