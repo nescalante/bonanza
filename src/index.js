@@ -67,19 +67,19 @@ function bonanza(element, options, callback) {
     if (bottom >= (-1 * options.scrollDistance) && dataList.hasMoreItems() && initialState) {
       context.emit('scrollbottom');
     }
-  });
+  }, { passive: true });
 
   container.onmousewheel = handleMouseWheel;
 
   element.addEventListener('focus', function () {
     context.emit('open');
-  });
+  }, { passive: true });
 
   element.addEventListener('blur', function (e) {
     if (options.closeOnBlur) {
       context.emit('close');
     }
-  });
+  }, { passive: true });
 
   element.addEventListener('keyup', function (e) {
     var key = keys[e.keyCode];
@@ -89,7 +89,7 @@ function bonanza(element, options, callback) {
     } else if (key !== 'enter') {
       currentValue = null;
     }
-  });
+  }, { passive: true });
 
   element.addEventListener('keydown', function (e) {
     var lastIndex;
@@ -153,7 +153,7 @@ function bonanza(element, options, callback) {
     } else {
       currentValue = null;
     }
-  });
+  }, { passive: true });
 
   context.on('scrollbottom', function () {
     context.emit('search', {
