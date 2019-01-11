@@ -27,13 +27,13 @@ bonanza(document.querySelector('input'), ['Bart', 'Lisa', 'Maggie']);
     <p>Source:</p>
     <pre>
 <code>
-bonanza(document.querySelector('input'), function (query, done) {
+bonanza(document.querySelector('input'), (query, done) => {
   request
     .get('/search?term=' + query.search + '&offset=' + query.offset + '&limit=' + query.limit)
-    .on('response', function (res) {
+    .on('response', (res) => {
       done(null, res.body);
     })
-    .on('error', function (err) {
+    .on('error', (err) => {
       done(err);
     });
 });
@@ -62,15 +62,15 @@ bonanza(document.querySelector('input'), function (query, done) {
     <p>Source:</p>
     <pre>
 <code>
-var options = { templates: { item: (obj) => `${obj.firstName} ${obj.lastName}` } };
+const options = { templates: { item: (obj) => `${obj.firstName} ${obj.lastName}` } };
 
-bonanza(document.querySelector('input'), options, function (query, done) {
+bonanza(document.querySelector('input'), options, (query, done) => {
   request
     .get('/search?term=' + query.search + '&offset=' + query.offset + '&limit=' + query.limit)
-    .on('response', function (res) {
+    .on('response', (res) => {
       done(null, res.body);
     })
-    .on('error', function (err) {
+    .on('error', (err) => {
       done(err);
     });
 });
@@ -84,14 +84,14 @@ bonanza(document.querySelector('input'), options, function (query, done) {
     <p>Source:</p>
     <pre>
 <code>
-bonanza(document.querySelector('input'), options, function (query, done) {
+bonanza(document.querySelector('input'), options, (query, done) => {
   if (query.search.length > 3) {
     request
       .get('/search?term=' + query.search + '&offset=' + query.offset + '&limit=' + query.limit)
-      .on('response', function (res) {
+      .on('response', (res) => {
         done(null, res.body);
       })
-      .on('error', function (err) {
+      .on('error', (err) => {
         done(err);
       });
   } else {
@@ -107,17 +107,17 @@ bonanza(document.querySelector('input'), options, function (query, done) {
     <p>Source:</p>
     <pre>
 <code>
-bonanza(document.querySelector('input'), options, function (query, done) {
+bonanza(document.querySelector('input'), options, (query, done) => {
   request
     .get('/search?term=' + query.search + '&offset=' + query.offset + '&limit=' + query.limit)
-    .on('response', function (res) {
+    .on('response', (res) => {
       done(null, res.body);
     })
-    .on('error', function (err) {
+    .on('error', (err) => {
       done(err);
     });
 })
-.on('change', function (item) {
+.on('change', (item) => {
   alert(JSON.stringify(item));
 });
 </code>
@@ -129,20 +129,20 @@ bonanza(document.querySelector('input'), options, function (query, done) {
     <p>Source:</p>
     <pre>
 <code>
-var options = {
+const options = {
   templates: {
     item: (obj) => `${obj.firstName} ${obj.lastName}`,
     isDisabled: (obj) => obj.isDisabled
   }
 };
 
-bonanza(document.querySelector('input'), options, function (query, done) {
+bonanza(document.querySelector('input'), options, (query, done) => {
   request
     .get('/search?term=' + query.search + '&offset=' + query.offset + '&limit=' + query.limit)
-    .on('response', function (res) {
+    .on('response', (res) => {
       done(null, res.body);
     })
-    .on('error', function (err) {
+    .on('error', (err) => {
       done(err);
     });
 });
