@@ -1110,19 +1110,19 @@ function bonanza(element, options, callback) {
     if (bottom >= (-1 * options.scrollDistance) && dataList.hasMoreItems() && initialState) {
       context.emit('scrollbottom');
     }
-  }, { passive: true });
+  }, util.getPassiveOption());
 
   container.onmousewheel = handleMouseWheel;
 
   element.addEventListener('focus', function () {
     context.emit('open');
-  }, { passive: true });
+  }, util.getPassiveOption());
 
   element.addEventListener('blur', function (e) {
     if (options.closeOnBlur) {
       context.emit('close');
     }
-  }, { passive: true });
+  }, util.getPassiveOption());
 
   element.addEventListener('keyup', function (e) {
     var key = keys[e.keyCode];
@@ -1132,7 +1132,7 @@ function bonanza(element, options, callback) {
     } else if (key !== 'enter') {
       currentValue = null;
     }
-  }, { passive: true });
+  }, util.getPassiveOption());
 
   element.addEventListener('keydown', function (e) {
     var lastIndex;
@@ -1196,7 +1196,7 @@ function bonanza(element, options, callback) {
     } else {
       currentValue = null;
     }
-  }, { passive: true });
+  }, util.getPassiveOption());
 
   context.on('scrollbottom', function () {
     context.emit('search', {
@@ -1459,7 +1459,7 @@ function createList(context, options) {
       if (!isDisabled) {
         context.emit('change', info);
       }
-    }, { passive: true });
+    }, util.getPassiveOption());
 
     hideLoading();
     list.appendChild(itemElem);
@@ -1559,7 +1559,7 @@ function createList(context, options) {
     anchor.innerHTML = render(template, obj, true);
     anchor.addEventListener('mousedown', function () {
       context.emit('scrollbottom');
-    }, { passive: true });
+    }, util.getPassiveOption());
 
     element.className = className || '';
     element.appendChild(anchor);
@@ -1595,10 +1595,23 @@ function render(template, model, encode) {
 },{"./util.js":16}],16:[function(require,module,exports){
 'use strict';
 
+var supportsPassive = false;
+
+try {
+  var opts = Object.defineProperty({}, 'passive', {
+    get: function getPassiveSupport() {
+      supportsPassive = true;
+    },
+  });
+  window.addEventListener('testPassive', null, opts);
+  window.removeEventListener('testPassive', null, opts);
+} catch (e) {}
+
 module.exports = {
   encode: encode,
   merge: merge,
   queryRegExp: queryRegExp,
+  getPassiveOption: getPassiveOption,
 };
 
 function merge(obj1, obj2) {
@@ -1631,6 +1644,10 @@ function encode(str) {
    .replace(/>/g, '&gt;')
    .replace(/"/g, '&quot;')
    .replace(/'/g, '&#039;');
+}
+
+function getPassiveOption() {
+  return supportsPassive ? { passive: true } : false;
 }
 
 },{}]},{},[7]);

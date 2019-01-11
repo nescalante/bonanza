@@ -70,7 +70,7 @@ function createList(context, options) {
       if (!isDisabled) {
         context.emit('change', info);
       }
-    }, { passive: true });
+    }, util.getPassiveOption());
 
     hideLoading();
     list.appendChild(itemElem);
@@ -170,7 +170,7 @@ function createList(context, options) {
     anchor.innerHTML = render(template, obj, true);
     anchor.addEventListener('mousedown', function () {
       context.emit('scrollbottom');
-    }, { passive: true });
+    }, util.getPassiveOption());
 
     element.className = className || '';
     element.appendChild(anchor);

@@ -1,9 +1,22 @@
 'use strict';
 
+var supportsPassive = false;
+
+try {
+  var opts = Object.defineProperty({}, 'passive', {
+    get: function getPassiveSupport() {
+      supportsPassive = true;
+    },
+  });
+  window.addEventListener('testPassive', null, opts);
+  window.removeEventListener('testPassive', null, opts);
+} catch (e) {}
+
 module.exports = {
   encode: encode,
   merge: merge,
   queryRegExp: queryRegExp,
+  getPassiveOption: getPassiveOption,
 };
 
 function merge(obj1, obj2) {
@@ -36,4 +49,8 @@ function encode(str) {
    .replace(/>/g, '&gt;')
    .replace(/"/g, '&quot;')
    .replace(/'/g, '&#039;');
+}
+
+function getPassiveOption() {
+  return supportsPassive ? { passive: true } : false;
 }
