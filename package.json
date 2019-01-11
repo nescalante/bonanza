@@ -1,7 +1,7 @@
 {
   "name": "bonanza",
   "version": "1.2.0",
-  "description": "Customizable autocomplete for really large collections",
+  "description": "Asynchronous autocomplete with infinite scroll",
   "main": "bonanza.js",
   "scripts": {
     "test": "jshint src/*.js tests/**/*.js && jscs src/*.js tests/**/*.js && browserify tests/*.js | tape-run | tap-spec",
