@@ -81,7 +81,7 @@ function createList(context, options) {
     return '<span' +
       (options.css.match ? ' class="' + options.css.match + '"' : '') +
       '>' +
-      str +
+      util.encode(str) +
       '</span>';
   }
 
