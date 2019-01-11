@@ -5,7 +5,7 @@
   "main": "bonanza.js",
   "scripts": {
     "test": "jshint src/*.js tests/**/*.js && jscs src/*.js tests/**/*.js && browserify tests/*.js | tape-run | tap-spec",
-    "build": "browserify bonanza.js -d -o dist/bonanza.js && uglifyjs dist/bonanza.js -o dist/bonanza.min.js && cleancss dist/bonanza.css -o dist/bonanza.min.css && browserify demo/index.js -o demo/demo.js",
+    "build": "browserify bonanza.js -d -o dist/bonanza.js && uglifyjs dist/bonanza.js -o dist/bonanza.min.js && cleancss dist/bonanza.css -o dist/bonanza.min.css && browserify demo/index.js -o demo/demo.js && browserify demo/highlight.js -o demo/javascript.js",
     "start": "static & watchify demo/index.js -o demo/demo.js",
     "preversion": "npm run build && git commit --allow-empty -am 'pre-release commit'",
     "postversion": "git push && git push --tags && npm publish && npm run update-gh-pages",
@@ -28,6 +28,7 @@
   "devDependencies": {
     "browserify": "^14.4.0",
     "clean-css-cli": "^4.0.12",
+    "highlight.js": "^9.13.1",
     "jscs": "^3.0.7",
     "jshint": "^2.9.1",
     "node-static": "^0.7.7",

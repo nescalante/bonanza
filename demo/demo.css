@@ -1,4 +1,10 @@
-div, ul, li, h1, h2, h3, h4 {
+div,
+ul,
+li,
+h1,
+h2,
+h3,
+h4 {
   margin: 0;
   padding: 0;
 }
@@ -21,7 +27,8 @@ h3 {
   color: #521;
 }
 
-h2, h3 {
+h2,
+h3 {
   text-align: center;
 }
 
@@ -72,7 +79,9 @@ input[type="text"] {
   border: 1px solid #333;
 }
 
-.bz-list-loading, .bz-list-load-more, .bz-list-no-results {
+.bz-list-loading,
+.bz-list-load-more,
+.bz-list-no-results {
   padding: 8px;
   color: #666;
 }
@@ -105,4 +114,21 @@ input[type="text"] {
 .bz-text-match {
   font-weight: bold;
   text-decoration: underline;
+}
+
+.hljs-built_in,
+.hljs-keyword {
+  color: #459;
+}
+
+.hljs-number {
+  color: #839;
+}
+
+.hljs-string {
+  color: #923;
+}
+
+.hljs-literal {
+  color: #67d;
 }

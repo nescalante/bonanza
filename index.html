@@ -22,7 +22,7 @@
     <input id="example1" type="text" placeholder="Type a Simpsons child name" />
     <p>Source:</p>
     <pre>
-<code>
+<code class="javascript">
 bonanza(document.querySelector('input'), ['Bart', 'Lisa', 'Maggie']);
 </code>
     </pre>
@@ -32,10 +32,10 @@ bonanza(document.querySelector('input'), ['Bart', 'Lisa', 'Maggie']);
     <input id="example2" type="text" placeholder="Type a character" />
     <p>Source:</p>
     <pre>
-<code>
+<code class="javascript">
 bonanza(document.querySelector('input'), (query, done) => {
   request
-    .get('/search?term=' + query.search + '&offset=' + query.offset + '&limit=' + query.limit)
+    .get(`/search?term=${query.search}&offset=${query.offset}&limit=${query.limit}`)
     .on('response', (res) => {
       done(null, res.body);
     })
@@ -52,7 +52,7 @@ bonanza(document.querySelector('input'), (query, done) => {
     <input id="example3" type="text" placeholder="Type a character" />
     <p>Sample data:</p>
     <pre>
-<code>
+<code class="javascript">
 [{
   "firstName": "Abraham",
   "lastName": "Simpson"
@@ -67,12 +67,12 @@ bonanza(document.querySelector('input'), (query, done) => {
     </pre>
     <p>Source:</p>
     <pre>
-<code>
+<code class="javascript">
 const options = { templates: { item: (obj) => `${obj.firstName} ${obj.lastName}` } };
 
 bonanza(document.querySelector('input'), options, (query, done) => {
   request
-    .get('/search?term=' + query.search + '&offset=' + query.offset + '&limit=' + query.limit)
+    .get(`/search?term=${query.search}&offset=${query.offset}&limit=${query.limit}`)
     .on('response', (res) => {
       done(null, res.body);
     })
@@ -89,11 +89,11 @@ bonanza(document.querySelector('input'), options, (query, done) => {
     <input id="example4" type="text" placeholder="Type a character" />
     <p>Source:</p>
     <pre>
-<code>
+<code class="javascript">
 bonanza(document.querySelector('input'), options, (query, done) => {
   if (query.search.length > 3) {
     request
-      .get('/search?term=' + query.search + '&offset=' + query.offset + '&limit=' + query.limit)
+      .get(`/search?term=${query.search}&offset=${query.offset}&limit=${query.limit}`)
       .on('response', (res) => {
         done(null, res.body);
       })
@@ -112,10 +112,10 @@ bonanza(document.querySelector('input'), options, (query, done) => {
     <input id="example5" type="text" placeholder="Type a character" />
     <p>Source:</p>
     <pre>
-<code>
+<code class="javascript">
 bonanza(document.querySelector('input'), options, (query, done) => {
   request
-    .get('/search?term=' + query.search + '&offset=' + query.offset + '&limit=' + query.limit)
+    .get(`/search?term=${query.search}&offset=${query.offset}&limit=${query.limit}`)
     .on('response', (res) => {
       done(null, res.body);
     })
@@ -134,7 +134,7 @@ bonanza(document.querySelector('input'), options, (query, done) => {
     <input id="example6" type="text" placeholder="Type a character" />
     <p>Source:</p>
     <pre>
-<code>
+<code class="javascript">
 const options = {
   templates: {
     item: (obj) => `${obj.firstName} ${obj.lastName}`,
@@ -144,7 +144,7 @@ const options = {
 
 bonanza(document.querySelector('input'), options, (query, done) => {
   request
-    .get('/search?term=' + query.search + '&offset=' + query.offset + '&limit=' + query.limit)
+    .get(`/search?term=${query.search}&offset=${query.offset}&limit=${query.limit}`)
     .on('response', (res) => {
       done(null, res.body);
     })
@@ -160,5 +160,6 @@ bonanza(document.querySelector('input'), options, (query, done) => {
   </div>
 </div>
 <script src="demo/demo.js"></script>
+<script src="demo/javascript.js"></script>
 </body>
 </html>
