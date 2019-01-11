@@ -1,6 +1,6 @@
 {
   "name": "bonanza",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Asynchronous autocomplete with infinite scroll",
   "main": "bonanza.js",
   "scripts": {
