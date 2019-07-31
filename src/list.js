@@ -16,7 +16,7 @@ function createList(context, options) {
   var items = [];
   context.container.innerHTML = '<ul' +
     (options.css.list ? ' class="' + options.css.list + '"' : '') +
-    '></ul>';
+    ' id="' + options.controlListId + '" role="listbox"></ul>';
   list = context.container.children[0];
 
   return {
@@ -39,7 +39,7 @@ function createList(context, options) {
     var matches;
     var isDisabled = options.templates.isDisabled(info);
     var itemClass = options.css.item + (isDisabled ? ' ' + options.css.disabled : '');
-    var itemElem = appendElement(options.templates.item, itemClass, info);
+    var itemElem = appendElement(options.templates.item, itemClass, info, options.controlListId);
     var item = { data: info, element: itemElem };
 
     if (search) {
@@ -102,7 +102,12 @@ function createList(context, options) {
     hideNoResults();
 
     if (!loading) {
-      loading = appendElement(options.templates.loading, options.css.loading, query);
+      loading = appendElement(
+        options.templates.loading,
+        options.css.loading,
+        query,
+        options.controlListId
+      );
     }
 
     return loading;
@@ -119,7 +124,12 @@ function createList(context, options) {
     hideLoading();
 
     if (!loadMore) {
-      loadMore = appendAnchor(options.templates.loadMore, options.css.loadMore, result);
+      loadMore = appendAnchor(
+        options.templates.loadMore,
+        options.css.loadMore,
+        result,
+        options.controlListId
+      );
     }
 
     if (!options.showLoadMore) {
@@ -140,7 +150,12 @@ function createList(context, options) {
     hideLoading();
 
     if (!loadMore) {
-      noResults = appendElement(options.templates.noResults, options.css.noResults, result);
+      noResults = appendElement(
+        options.templates.noResults,
+        options.css.noResults,
+        result,
+        options.controlListId
+      );
     }
   }
 
@@ -155,16 +170,19 @@ function createList(context, options) {
     return !!(loadMore || loading);
   }
 
-  function appendElement(template, className, obj) {
+  function appendElement(template, className, obj, controlListId) {
     var element = document.createElement('li');
     element.innerHTML = render(template, obj, true);
     element.className = className || '';
+    element.setAttribute('id', controlListId + '-item-' + list.children.length);
+    element.setAttribute('role', 'option');
+
     list.appendChild(element);
 
     return element;
   }
 
-  function appendAnchor(template, className, obj) {
+  function appendAnchor(template, className, obj, controlListId) {
     var element = document.createElement('li');
     var anchor = document.createElement('a');
     anchor.innerHTML = render(template, obj, true);
@@ -173,7 +191,10 @@ function createList(context, options) {
     }, util.getPassiveOption());
 
     element.className = className || '';
+    element.setAttribute('id', controlListId + '-item-' + list.children.length);
+    element.setAttribute('role', 'option');
     element.appendChild(anchor);
+
     list.appendChild(element);
 
     return element;

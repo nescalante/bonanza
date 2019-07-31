@@ -7,6 +7,7 @@ var keys = require('./keys.js');
 var list = require('./list.js');
 var render = require('./render.js');
 var util = require('./util.js');
+var instancesCount = 0;
 
 bonanza.defaults = defaults;
 global.bonanza = bonanza;
@@ -43,6 +44,15 @@ function bonanza(element, options, callback) {
   }
 
   options = util.merge(defaults, options);
+
+  options.controlListId = 'bonanza-control-list-' + instancesCount;
+
+  // aria settings
+  element.setAttribute('aria-autocomplete', 'list');
+  element.setAttribute('aria-expanded', 'false');
+  element.setAttribute('aria-controls', options.controlListId);
+  element.setAttribute('role', 'combobox');
+  instancesCount += 1;
 
   var context = new EventEmitter();
   var selectedItem;
@@ -181,6 +191,8 @@ function bonanza(element, options, callback) {
     dom.removeClass(container, options.css.hide);
     container.style.top = (element.offsetTop + element.offsetHeight) + 'px';
     container.style.left = (element.offsetLeft) + 'px';
+
+    element.setAttribute('aria-expanded', 'true');
   });
 
   context.on('close', function () {
@@ -188,6 +200,9 @@ function bonanza(element, options, callback) {
     dataList.hideLoading();
     dom.removeClass(element, options.css.inputLoading);
     dom.addClass(container, options.css.hide);
+
+    element.setAttribute('aria-expanded', 'false');
+
     selectedItem = null;
     lastQuery = null;
   });
@@ -209,6 +224,8 @@ function bonanza(element, options, callback) {
     }
 
     selectedItem = dataList.getByData(data);
+
+    element.setAttribute('aria-activedescendant', selectedItem.element.getAttribute('id'));
 
     if (selectedItem) {
       element.value = render(options.templates.label, data, false);
