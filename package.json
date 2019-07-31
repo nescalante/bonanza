@@ -27,15 +27,15 @@
   "homepage": "https://github.com/nescalante/bonanza",
   "devDependencies": {
     "browserify": "^14.4.0",
-    "clean-css-cli": "^4.0.12",
-    "highlight.js": "^9.13.1",
+    "clean-css-cli": "^4.3.0",
+    "highlight.js": "^9.15.9",
     "jscs": "^3.0.7",
-    "jshint": "^2.9.1",
+    "jshint": "^2.10.2",
     "node-static": "^0.7.7",
     "tap-spec": "^5.0.0",
-    "tape": "^4.5.0",
+    "tape": "^4.11.0",
     "tape-run": "^3.0.0",
-    "uglify-js": "^3.0.0",
+    "uglify-js": "^3.6.0",
     "watchify": "^3.11.1"
   }
 }
