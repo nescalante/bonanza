@@ -68,7 +68,7 @@ bonanza(document.querySelector('input'), (query, done) => {
     <p>Source:</p>
     <pre>
 <code class="javascript">
-const options = { templates: { item: (obj) => `${obj.firstName} ${obj.lastName}` } };
+const options = { templates: { itemLabel: (obj) => `${obj.firstName} ${obj.lastName}` } };
 
 bonanza(document.querySelector('input'), options, (query, done) => {
   request
@@ -137,7 +137,7 @@ bonanza(document.querySelector('input'), options, (query, done) => {
 <code class="javascript">
 const options = {
   templates: {
-    item: (obj) => `${obj.firstName} ${obj.lastName}`,
+    itemLabel: (obj) => `${obj.firstName} ${obj.lastName}`,
     isDisabled: (obj) => obj.isDisabled
   }
 };

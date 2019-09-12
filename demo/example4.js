@@ -5,7 +5,7 @@ var util = require('../src/util.js');
 var list = require('./list.json');
 
 module.exports = function () {
-  bonanza(document.querySelector('#example4'), { templates: { item: function (obj) { return obj.firstName + ' ' + obj.lastName; } } }, request);
+  bonanza(document.querySelector('#example4'), { templates: { itemLabel: function (obj) { return obj.firstName + ' ' + obj.lastName; } } }, request);
 };
 
 function request(query, done) {

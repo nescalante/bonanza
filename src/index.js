@@ -32,8 +32,8 @@ function bonanza(element, options, callback) {
   }
 
   if (options.templates) {
-    if (options.templates.item && options.templates.label === undefined) {
-      options.templates.label = options.templates.item;
+    if (options.templates.itemLabel && options.templates.label === undefined) {
+      options.templates.label = options.templates.itemLabel;
     }
 
     options.templates = util.merge(defaults.templates, options.templates);

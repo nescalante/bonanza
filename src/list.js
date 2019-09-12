@@ -39,32 +39,8 @@ function createList(context, options) {
     var matches;
     var isDisabled = options.templates.isDisabled(info);
     var itemClass = options.css.item + (isDisabled ? ' ' + options.css.disabled : '');
-    var itemElem = appendElement(options.templates.item, itemClass, info, options.controlListId);
+    var itemElem = appendElement(renderItemLabel, itemClass, info, options.controlListId, false);
     var item = { data: info, element: itemElem };
-
-    if (search) {
-      label = options.templates.item(info);
-      regExp = util.queryRegExp(search);
-      innerHTML = '';
-
-      while (matches = regExp.exec(label)) {
-        innerHTML += util.encode(matches[1]);
-        innerHTML += highlight(matches[2]);
-        lastIndex = regExp.lastIndex;
-      }
-
-      if (innerHTML) {
-        innerHTML += util.encode(label.substr(lastIndex));
-      } else {
-        innerHTML += util.encode(label);
-      }
-
-      itemElem.innerHTML = innerHTML;
-    }
-
-    if (options.includeAnchors) {
-      itemElem.innerHTML = '<a>' + itemElem.innerHTML + '</a>';
-    }
 
     itemElem.addEventListener('mousedown', function (e) {
       if (!isDisabled) {
@@ -75,14 +51,12 @@ function createList(context, options) {
     hideLoading();
     list.appendChild(itemElem);
     items.push(item);
-  }
 
-  function highlight(str) {
-    return '<span' +
-      (options.css.match ? ' class="' + options.css.match + '"' : '') +
-      '>' +
-      util.encode(str) +
-      '</span>';
+    function renderItemLabel(item) {
+      var itemLabel = options.templates.itemLabel(item);
+
+      return options.templates.item(itemLabel, search, options);
+    }
   }
 
   function cleanItems() {
@@ -106,7 +80,8 @@ function createList(context, options) {
         options.templates.loading,
         options.css.loading,
         query,
-        options.controlListId
+        options.controlListId,
+        true
       );
     }
 
@@ -154,7 +129,8 @@ function createList(context, options) {
         options.templates.noResults,
         options.css.noResults,
         result,
-        options.controlListId
+        options.controlListId,
+        true
       );
     }
   }
@@ -170,9 +146,9 @@ function createList(context, options) {
     return !!(loadMore || loading);
   }
 
-  function appendElement(template, className, obj, controlListId) {
+  function appendElement(template, className, obj, controlListId, encode) {
     var element = document.createElement('li');
-    element.innerHTML = render(template, obj, true);
+    element.innerHTML = render(template, obj, encode);
     element.className = className || '';
     element.setAttribute('id', controlListId + '-item-' + list.children.length);
     element.setAttribute('role', 'option');

@@ -1,5 +1,7 @@
 'use strict';
 
+var util = require('./util.js');
+
 var css = {
   container: 'bz-container',
   hide: 'bz-hide',
@@ -15,7 +17,32 @@ var css = {
 };
 
 var templates = {
-  item: function (item) { return item; },
+  item: function (label, search, options) {
+    if (!search) {
+      return label;
+    }
+
+    var regExp = util.queryRegExp(search);
+    var result = '';
+    var matches;
+    var lastIndex;
+
+    while (matches = regExp.exec(label)) {
+      result += util.encode(matches[1]);
+      result += highlight(matches[2], options);
+      lastIndex = regExp.lastIndex;
+    }
+
+    if (result) {
+      result += util.encode(label.substr(lastIndex));
+    } else {
+      result += util.encode(label);
+    }
+
+    return result;
+  },
+
+  itemLabel: function (item) { return item; },
 
   label: function (label) { return label; },
 
@@ -36,10 +63,17 @@ module.exports = {
   closeOnBlur: true,
   showLoading: true,
   showloadMore: true,
-  includeAnchors: false,
   limit: 10,
   scrollDistance: 0,
   hasMoreItems: function (result) { return !!result.length && result.length === this.limit; },
 
   getItems: function (result) { return result; },
 };
+
+function highlight(str, options) {
+  return '<span' +
+    (options.css.match ? ' class="' + options.css.match + '"' : '') +
+    '>' +
+    util.encode(str) +
+    '</span>';
+}

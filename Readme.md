@@ -60,7 +60,8 @@ An object with a set of functions. Here you have a detailed table with all that 
 
 Property   | Default                                      | Usage
 ---------- | -------------------------------------------- | ---------------------------------------
-item       | `(obj) => obj`                               | List items
+itemLabel  | `(obj) => obj`                               | List items
+item       | `...customCode`                              | Custom HTML for list item
 label      | `(obj) => obj`                               | Input value when user selects some item
 isDisabled | `(obj) => false`                             | Marks an item as disabled
 noResults  | `(search) => \`No results for "${search}"\`` | Showed when query returns no results
