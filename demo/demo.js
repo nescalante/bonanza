@@ -978,7 +978,7 @@ var css = {
 };
 
 var templates = {
-  item: function (label, search, options) {
+  item: function (label, search, info, options) {
     if (!search) {
       return label;
     }
@@ -1495,7 +1495,7 @@ function createList(context, options) {
     function renderItemLabel(item) {
       var itemLabel = options.templates.itemLabel(item);
 
-      return options.templates.item(itemLabel, search, options);
+      return options.templates.item(itemLabel, info, search, options);
     }
   }
 
