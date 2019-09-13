@@ -17,7 +17,7 @@ var css = {
 };
 
 var templates = {
-  item: function (label, search, options) {
+  item: function (label, search, info, options) {
     if (!search) {
       return label;
     }
