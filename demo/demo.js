@@ -1495,7 +1495,7 @@ function createList(context, options) {
     function renderItemLabel(item) {
       var itemLabel = options.templates.itemLabel(item);
 
-      return options.templates.item(itemLabel, itemLabel, search, options);
+      return options.templates.item(itemLabel, search, info, options);
     }
   }
 
