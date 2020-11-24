@@ -28,7 +28,7 @@
   "devDependencies": {
     "browserify": "^14.4.0",
     "clean-css-cli": "^4.3.0",
-    "highlight.js": "^9.15.9",
+    "highlight.js": "^10.1.2",
     "jscs": "^3.0.7",
     "jshint": "^2.10.2",
     "node-static": "^0.7.7",
